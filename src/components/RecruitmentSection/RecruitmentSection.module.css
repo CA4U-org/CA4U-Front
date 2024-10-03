@@ -1,0 +1,59 @@
+.mainContainer {
+  margin: 10px 20px; /* 위아래 마진 10px, 양옆 마진 20px */
+}
+
+.recruitmentSection {
+  margin: 20px 0;
+}
+
+.title {
+  font-size: 16px;
+  font-family: "Noto Sans KR";
+  font-weight: bold;
+  color: #333;
+  text-align: left;
+  margin-top: 10px;
+  margin-bottom: 0; /* 하단 마진 제거 */
+}
+
+.recruitmentList {
+  display: flex;
+  justify-content: space-between;
+  overflow: hidden; /* 슬라이더 외부 영역 가리기 */
+  width: 100%; /* 리스트 전체 너비 설정 */
+}
+
+.recruitmentCard {
+  min-width: calc(
+    100% / 3 - 10px
+  ); /* 카드가 3개씩 나란히 배치되도록 설정, 간격 포함 */
+  text-align: left;
+  box-sizing: border-box;
+  padding: 10px;
+  background-color: #fff;
+  border-radius: 8px;
+}
+
+.recruitmentCard img {
+  width: 100%;
+  height: 133px;
+  border-radius: 10px;
+  margin-bottom: 10px;
+}
+
+.textContainer {
+  display: block;
+}
+
+.cardTitle {
+  font-size: 15px;
+  font-family: "Noto Sans KR";
+  font-weight: bold;
+  color: #333;
+  margin-bottom: 5px;
+}
+
+.cardDate {
+  font-size: 10px;
+  color: #454545;
+}

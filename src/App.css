@@ -1,5 +1,7 @@
 .App {
   text-align: center;
+  width: 375px;
+  font-family: "Noto Sans KR";
 }
 
 .App-logo {
