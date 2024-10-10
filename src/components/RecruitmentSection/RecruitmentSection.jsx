@@ -1,21 +1,21 @@
-import React from "react";
-import styles from "./RecruitmentSection.module.css";
+import React from 'react';
+import styles from './RecruitmentSection.module.css';
 
 const recruitments = [
   {
-    title: "타박네 2024년 연극부원 상시모집",
-    img: "../../assets/recruit1.png",
-    date: "~상시",
+    title: '타박네 2024년 연극부원 상시모집',
+    img: '../../assets/recruit1.png',
+    date: '~상시',
   },
   {
-    title: "CUSCM: 2학기 부원 모집합니다",
-    img: "../../assets/recruit2.png",
-    date: "~8/31",
+    title: 'CUSCM: 2학기 부원 모집합니다',
+    img: '../../assets/recruit2.png',
+    date: '~8/31',
   },
   {
-    title: "Da C Side: 학기 신입 부원 모집",
-    img: "../../assets/recruit3.png",
-    date: "~9/31",
+    title: 'Da C Side: 학기 신입 부원 모집',
+    img: '../../assets/recruit3.png',
+    date: '~9/31',
   },
 ];
 

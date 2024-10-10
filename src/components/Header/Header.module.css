@@ -1,91 +1,93 @@
 .header {
-  width: 100%;
-  height: 89px;
-  padding: 10px 15px 5px 20px;
-  background-color: #d4eaff;
-  box-sizing: border-box;
-  border-radius: 0 0 20px 20px;
+    width: 100%;
+    height: 89px;
+    padding: 10px 15px 5px 20px;
+    background-color: #d4eaff;
+    box-sizing: border-box;
+    border-radius: 0 0 20px 20px;
 }
 
 .headerContainer {
-  width: 100%;
-  height: 50%;
-  display: flex;
-  justify-content: space-between;
+    width: 100%;
+    height: 50%;
+    display: flex;
+    justify-content: space-between;
 }
 
 .myIcon {
-  width: 30px;
-  height: 30px;
+    width: 30px;
+    height: 30px;
 }
 
 .ca4uTitleContainer {
-  display: flex;
-  justify-content: space-evenly;
-  width: 245px;
-  height: 27px;
+    display: flex;
+    justify-content: space-evenly;
+    width: 245px;
+    height: 27px;
 }
 
 .ca4uIconContainer {
-  margin: 0;
-  .ca4uIcon {
-    width: 80px;
-    height: 35px;
-  }
+    margin: 0;
+
+    .ca4uIcon {
+        width: 80px;
+        height: 35px;
+    }
 }
 
 .titleEng {
-  margin: 0;
-  font-family: "Noto Sans KR";
-  width: 158px;
-  height: 12px;
-  font-weight: bold;
-  font-size: 10px;
-  text-align: left;
-  color: #1b438c;
+    margin: 0;
+    font-family: "Noto Sans KR";
+    width: 158px;
+    height: 12px;
+    font-weight: bold;
+    font-size: 10px;
+    text-align: left;
+    color: #1b438c;
 }
 
 .redText {
-  color: red;
+    color: red;
 }
 
 .titleKor {
-  margin: 0;
-  width: 180px;
-  height: 20px;
-  font-family: "Noto Sans KR";
-  font-size: 16px;
-  font-weight: 1000;
-  text-align: left;
-  color: #1b438c;
+    margin: 0;
+    width: 180px;
+    height: 20px;
+    font-family: "Noto Sans KR";
+    font-size: 16px;
+    font-weight: 1000;
+    text-align: left;
+    color: #1b438c;
 }
 
 .searchContainer {
-  display: flex;
-  justify-content: left;
-  margin-top: 10px;
-  width: 100%;
-  height: 20px;
-  padding: 5px;
-  background-color: white;
-  box-sizing: border-box;
+    display: flex;
+    justify-content: left;
+    margin-top: 10px;
+    width: 100%;
+    height: 20px;
+    padding: 5px;
+    background-color: white;
+    box-sizing: border-box;
 }
 
 .searchIcon {
-  width: 10px;
-  height: 10px;
-  margin-right: 5px;
+    width: 10px;
+    height: 10px;
+    margin-right: 5px;
 }
+
 .searchInput {
-  width: 100%;
-  height: 20px;
-  font-size: 10px;
-  font-weight: bold;
-  font-family: "Noto Sans KR";
-  color: #959595;
-  height: 100%;
-  padding: 0;
-  border-color: white;
-  border-width: 0;
-  border-color: white;
+    width: 100%;
+    height: 20px;
+    font-size: 10px;
+    font-weight: bold;
+    font-family: "Noto Sans KR";
+    color: #959595;
+    height: 100%;
+    padding: 0;
+    border-color: white;
+    border-width: 0;
+    border-color: white;
 }

@@ -1,8 +1,8 @@
-import React from "react";
-import styles from "./AffiliationView.module.css";
-import linkIcon from "../../assets/link_icon.png";
-import cauIcon from "../../assets/cau-icon.png";
-import mascotIcon from "../../assets/mascot-icon.png";
+import React from 'react';
+import styles from './AffiliationView.module.css';
+import linkIcon from '../../assets/link_icon.png';
+import cauIcon from '../../assets/cau-icon.png';
+import mascotIcon from '../../assets/mascot-icon.png';
 
 function AffiliationView() {
   return (

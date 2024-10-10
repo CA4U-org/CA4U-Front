@@ -1,5 +1,5 @@
-import React from "react";
-import Slider from "react-slick";
+import React from 'react';
+import Slider from 'react-slick';
 
 // ClubImageSlider 컴포넌트
 const ClubImageSlider = ({ images, logo }) => {
@@ -11,10 +11,10 @@ const ClubImageSlider = ({ images, logo }) => {
     slidesToScroll: 1, // 한 번에 스크롤할 슬라이드 개수
     autoplay: false, // 자동 슬라이드 여부
     autoplaySpeed: 3000, // 자동 슬라이드 시간 (3초)
-    dotsClass: "slick-dots custom-dots",
+    dotsClass: 'slick-dots custom-dots',
   };
 
-  const wrapperStyle = { position: "relative", width: "100%", height: "100%" };
+  const wrapperStyle = { position: 'relative', width: '100%', height: '100%' };
 
   return (
     <div style={wrapperStyle}>
@@ -24,7 +24,7 @@ const ClubImageSlider = ({ images, logo }) => {
             <img
               src={image}
               alt={`Slide ${index}`}
-              style={{ width: "100%", height: "200px" }}
+              style={{ width: '100%', height: '200px' }}
             />
           </div>
         ))}
@@ -33,18 +33,18 @@ const ClubImageSlider = ({ images, logo }) => {
       {/* 로고 배치 - 왼쪽 하단 */}
       <div
         style={{
-          position: "absolute",
-          left: "20px",
-          bottom: "10px",
-          backgroundColor: "rgba(0, 0, 0, 0.5)", // 로고 배경을 반투명하게 설정
-          height: "30px",
-          width: "30px",
+          position: 'absolute',
+          left: '20px',
+          bottom: '10px',
+          backgroundColor: 'rgba(0, 0, 0, 0.5)', // 로고 배경을 반투명하게 설정
+          height: '30px',
+          width: '30px',
         }}
       >
         <img
           src={logo}
           alt="Club Logo"
-          style={{ width: "100%", height: "100%" }}
+          style={{ width: '100%', height: '100%' }}
         />
       </div>
     </div>
