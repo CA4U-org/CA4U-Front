@@ -38,3 +38,11 @@
     transform: rotate(360deg);
   }
 }
+
+.no-drag {
+  -webkit-user-drag: none;
+  -moz-user-drag: none;
+  -ms-user-drag: none;
+  user-drag: none;
+  user-select: none; /* 텍스트 선택도 방지 */
+}

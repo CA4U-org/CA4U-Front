@@ -35,6 +35,7 @@ export function MobileFrameWrapper(props) {
                     h={'100vh'}
                     overflowY={'scroll'}
                     bgColor={'white'}
+                    className={'no-drag'}
                 >
                     {/*이 곳에 애플리케이션 화면이 들어옵니다.*/}
                     {props.children}
