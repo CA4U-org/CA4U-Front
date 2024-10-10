@@ -5,6 +5,8 @@
   text-align: center;
   display: block;
   box-sizing: border-box;
+  overflow-x: hidden;
+
 }
 
 .title {
