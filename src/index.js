@@ -6,12 +6,13 @@ import "slick-carousel/slick/slick-theme.css";
 import "./index.css";
 import App from "./App";
 import {ChakraProvider} from "@chakra-ui/react";
+import {cauTheme} from "./shared/CAUTheme";
 
 const container = document.getElementById("root");
 const root = createRoot(container);
 root.render(
   <React.StrictMode>
-      <ChakraProvider>
+      <ChakraProvider theme={cauTheme}>
           <App />
       </ChakraProvider>
   </React.StrictMode>

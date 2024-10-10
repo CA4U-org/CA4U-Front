@@ -17,9 +17,9 @@ function Branding() {
                 fontFamily={'Noto Sans KR'}
                 fontWeight={'bold'}
                 fontSize={'xl'}
-                color={'#1b438c'}
+                color={'cauDarkBlue'}
             >
-                Club & Academy <span style={{color:'red'}}>4</span> U
+                Club & Academy <Text as={'span'} color={'cauRed'}>4</Text> U
             </Text>
             <Text mt={1} fontSize={'sm'} color={'gray.800'}>중앙대 동아리가 당신의 손안에</Text>
         </Flex>
