@@ -7,8 +7,8 @@ function Branding() {
       direction={'column'}
       align={'center'}
       bg={'white'}
-      p={8}
-      borderRadius={'lg'}
+      p={10}
+      borderRadius={'2xl'}
       boxShadow={'lg'}
     >
       <Image src={CA4UIcon} w={'100px'} h={'44px'} />
