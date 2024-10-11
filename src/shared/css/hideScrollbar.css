@@ -1,0 +1,9 @@
+/* 전체 페이지에서 스크롤바 숨기기 */
+.hide-scrollbar {
+    -ms-overflow-style: none; /* Internet Explorer, Edge */
+    scrollbar-width: none; /* Firefox */
+}
+
+.hide-scrollbar::-webkit-scrollbar {
+    display: none; /* Chrome, Safari, Opera */
+}

@@ -1,40 +1,9 @@
-import { Box, Flex, Image, Show, Text } from '@chakra-ui/react';
-import CA4UIcon from './assets/ca4u-icon.png';
-
-function Branding() {
-  return (
-    <Flex
-      direction={'column'}
-      align={'center'}
-      bg={'white'}
-      p={10}
-      borderRadius={'2xl'}
-      boxShadow={'lg'}
-    >
-      <Image src={CA4UIcon} w={'100px'} h={'44px'} />
-      <Text
-        mt={3}
-        fontFamily={'Noto Sans KR'}
-        fontWeight={'bold'}
-        fontSize={'xl'}
-        color={'cauDarkBlue'}
-      >
-        Club & Academy{' '}
-        <Text as={'span'} color={'cauRed'}>
-          4
-        </Text>{' '}
-        U
-      </Text>
-      <Text mt={1} fontSize={'sm'} color={'gray.800'}>
-        중앙대 동아리가 당신의 손안에
-      </Text>
-    </Flex>
-  );
-}
+import { Box, Flex, Show } from '@chakra-ui/react';
+import { Introduction } from './Introduction';
 
 export function MobileFrameWrapper(props) {
   return (
-    <Flex bg={'#eee'} w={'100vw'} className={'no-drag'}>
+    <Flex bg={'#eee'} w={'100vw'} className={'no-drag '}>
       <Flex m={'0 auto'}>
         <Show above={'sm'}>
           <Flex
@@ -43,7 +12,7 @@ export function MobileFrameWrapper(props) {
             justify={'center'}
             direction={'column'}
           >
-            <Branding />
+            <Introduction />
           </Flex>
         </Show>
         <Box
@@ -51,6 +20,7 @@ export function MobileFrameWrapper(props) {
           h={'100vh'}
           overflowY={'scroll'}
           bgColor={'white'}
+          className={'hide-scrollbar'}
         >
           {/*이 곳에 애플리케이션 화면이 들어옵니다.*/}
           {props.children}
