@@ -1,6 +1,6 @@
-import React from "react";
-import styles from "./StaffGuide.module.css";
-import ca4uRecIcon from "../../assets/ca4u-rec-icon.png";
+import React from 'react';
+import styles from './StaffGuide.module.css';
+import ca4uRecIcon from '../../assets/ca4u-rec-icon.png';
 
 function StaffGuide() {
   return (

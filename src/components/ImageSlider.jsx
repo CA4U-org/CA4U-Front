@@ -1,5 +1,5 @@
-import React from "react";
-import Slider from "react-slick";
+import React from 'react';
+import Slider from 'react-slick';
 
 const ImageSlider = () => {
   const settings = {
@@ -13,19 +13,19 @@ const ImageSlider = () => {
   };
 
   const images = [
-    "https://via.placeholder.com/800x400?text=Slide+1",
-    "https://via.placeholder.com/800x400?text=Slide+2",
-    "https://via.placeholder.com/800x400?text=Slide+3",
-    "https://via.placeholder.com/800x400?text=Slide+4",
-    "https://via.placeholder.com/800x400?text=Slide+5",
+    'https://via.placeholder.com/800x400?text=Slide+1',
+    'https://via.placeholder.com/800x400?text=Slide+2',
+    'https://via.placeholder.com/800x400?text=Slide+3',
+    'https://via.placeholder.com/800x400?text=Slide+4',
+    'https://via.placeholder.com/800x400?text=Slide+5',
   ];
 
   return (
-    <div style={{ width: "800px", margin: "0 auto" }}>
+    <div style={{ width: '800px', margin: '0 auto' }}>
       <Slider {...settings}>
         {images.map((image, index) => (
           <div key={index}>
-            <img src={image} alt={`Slide ${index}`} style={{ width: "100%" }} />
+            <img src={image} alt={`Slide ${index}`} style={{ width: '100%' }} />
           </div>
         ))}
       </Slider>

@@ -1,8 +1,8 @@
-import React from "react";
-import styles from "./Header.module.css";
-import ca4uIcon from "../../assets/ca4u-icon.png";
-import myIcon from "../../assets/my-icon.png";
-import searchIcon from "../../assets/search-icon.png";
+import React from 'react';
+import styles from './Header.module.css';
+import ca4uIcon from '../../assets/ca4u-icon.png';
+import myIcon from '../../assets/my-icon.png';
+import searchIcon from '../../assets/search-icon.png';
 
 function Header() {
   return (

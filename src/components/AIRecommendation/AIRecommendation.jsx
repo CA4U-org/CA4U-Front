@@ -1,7 +1,7 @@
-import React, { useState } from "react";
-import styles from "./AIRecommendation.module.css";
-import mainImage from "../../assets/main-image.png";
-import clubLogo from "../../assets/club-logo.png";
+import React, { useState } from 'react';
+import styles from './AIRecommendation.module.css';
+import mainImage from '../../assets/main-image.png';
+import clubLogo from '../../assets/club-logo.png';
 
 function AIRecommendation() {
   const [currentIndex, setCurrentIndex] = useState(0);
@@ -145,7 +145,7 @@ function AIRecommendation() {
             <div
               key={index}
               className={`${styles.dot} ${
-                currentIndex === index ? styles.active : ""
+                currentIndex === index ? styles.active : ''
               }`}
             ></div>
           ))}
