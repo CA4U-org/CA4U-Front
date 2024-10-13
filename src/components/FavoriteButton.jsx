@@ -38,7 +38,7 @@ const FavoriteButton = () => {
         }}
       >
         즐겨찾기
-      </p>
+      </p>  
     </div>
   );
 };
