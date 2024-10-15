@@ -1,5 +1,5 @@
 import React from 'react';
-import Header from './components/Header/Header';
+import Header from './Header';
 import AIRecommendation from './components/AIRecommendation/AIRecommendation';
 import ClubRanking from './components/ClubRanking/ClubRanking';
 import './App.css';
@@ -7,19 +7,47 @@ import AffiliationView from './components/AffiliationView/AffiliationView';
 import StaffGuide from './components/StaffGuide/StaffGuide';
 import CategoryView from './components/CategoryView/CategoryView';
 import RecruitmentSection from './components/RecruitmentSection/RecruitmentSection';
+import { Box, Flex, Text, Button, ButtonGroup, Grid } from '@chakra-ui/react';
+import AffiliationViewButton from './components/AffiliationViewButton';
+import linkIcon from './assets/link_icon.svg';
+import cauIcon from './assets/CAU-logo.svg';
+import puangIcon from './assets/푸앙-icon.svg';
 
-function MainPage() {
+export default function MainPage() {
   return (
-    <div className="MainPage">
+    <Box>
       <Header />
-      <AffiliationView />
+      <Text mt={6} ml={4} fontSize="xl" fontWeight="bold">
+        소속별로 보기
+      </Text>
+      <Grid
+        templateColumns="repeat(3,1fr)"
+        gap={4}
+        width="full"
+        maxWidth="4xl"
+        mx="auto"
+      >
+        <AffiliationViewButton
+          mainText="중앙"
+          subText="동아리 연합회 소속"
+          icon={cauIcon}
+        ></AffiliationViewButton>
+        <AffiliationViewButton
+          mainText="단과대/학과"
+          subText="단과대/학과(부) 소속"
+          icon={linkIcon}
+        ></AffiliationViewButton>
+        <AffiliationViewButton
+          mainText="그 외"
+          subText="준 동아리, 학회, 스터디 등"
+          icon={puangIcon}
+        ></AffiliationViewButton>
+      </Grid>
       <StaffGuide />
+      <Text mt={6} ml={4} fontSize="xl" fontWeight="bold">
+        카테고리별로 보기
+      </Text>
       <CategoryView />
-      <AIRecommendation />
-      <ClubRanking />
-      <RecruitmentSection />
-    </div>
+    </Box>
   );
 }
-
-export default MainPage;

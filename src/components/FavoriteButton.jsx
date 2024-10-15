@@ -1,7 +1,6 @@
 import React, { useState } from 'react';
 import filledHeart from '../assets/하트o.png';
 import emptyHeart from '../assets/하트x.png';
-
 const FavoriteButton = () => {
   const [isFavorited, setIsFavorited] = useState(false);
 
@@ -39,7 +38,7 @@ const FavoriteButton = () => {
         }}
       >
         즐겨찾기
-      </p>  
+      </p>
     </div>
   );
 };
