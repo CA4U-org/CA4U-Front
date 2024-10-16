@@ -1,73 +1,73 @@
 .mainContainer {
-    width: 100%;
-    margin: 10px 0;
-    padding: 0 20px;
-    box-sizing: border-box;
+  width: 100%;
+  margin: 10px 0;
+  padding: 0 20px;
+  box-sizing: border-box;
 }
 
 .textContainer {
-    text-align: left;
+  text-align: left;
 }
 
 .title {
-    text-align: left;
-    font-size: 16px;
-    font-family: "Noto Sans KR";
-    font-weight: bold;
-    color: #454545;
-    margin-bottom: 0px;
-    vertical-align: bottom;
+  text-align: left;
+  font-size: 16px;
+  font-family: 'Noto Sans KR';
+  font-weight: bold;
+  color: #454545;
+  margin-bottom: 0px;
+  vertical-align: bottom;
 }
 
 .subtitle {
-    margin-left: 10px;
-    font-size: 12px;
-    color: #959595;
-    font-family: "Noto Sans KR";
-    font-weight: bold;
-    margin-bottom: 0px;
-    vertical-align: bottom;
+  margin-left: 10px;
+  font-size: 12px;
+  color: #959595;
+  font-family: 'Noto Sans KR';
+  font-weight: bold;
+  margin-bottom: 0px;
+  vertical-align: bottom;
 }
 
 .clubContainer {
-    display: flex;
-    align-items: center;
-    margin-bottom: 15px;
-    padding: 10px 0;
-    border-bottom: 1px solid #e0e0e0;
+  display: flex;
+  align-items: center;
+  margin-bottom: 15px;
+  padding: 10px 0;
+  border-bottom: 1px solid #e0e0e0;
 }
 
 .medal {
-    width: 40px;
-    height: 40px;
-    margin-right: 15px;
+  width: 40px;
+  height: 40px;
+  margin-right: 15px;
 }
 
 .clubText {
-    display: block;
-    flex-grow: 1;
+  display: block;
+  flex-grow: 1;
 }
 
 .clubName {
-    display: block;
-    font-size: 16px;
-    font-family: "Noto Sans KR";
-    font-weight: bold;
-    text-align: left;
-    color: #454545;
-    margin-bottom: 5px;
+  display: block;
+  font-size: 16px;
+  font-family: 'Noto Sans KR';
+  font-weight: bold;
+  text-align: left;
+  color: #454545;
+  margin-bottom: 5px;
 }
 
 .clubDescription {
-    display: block;
-    text-align: left;
-    font-size: 12px;
-    font-family: "Noto Sans KR";
-    font-weight: bold;
-    color: #454545;
+  display: block;
+  text-align: left;
+  font-size: 12px;
+  font-family: 'Noto Sans KR';
+  font-weight: bold;
+  color: #454545;
 }
 
 .clubLogo {
-    width: 50px;
-    height: 50px;
+  width: 50px;
+  height: 50px;
 }
