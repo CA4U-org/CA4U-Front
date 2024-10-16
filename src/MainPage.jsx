@@ -1,13 +1,9 @@
 import React from 'react';
 import Header from './Header';
-import AIRecommendation from './components/AIRecommendation/AIRecommendation';
-import ClubRanking from './components/ClubRanking/ClubRanking';
 import './App.css';
-import AffiliationView from './components/AffiliationView/AffiliationView';
 import StaffGuide from './components/StaffGuide/StaffGuide';
 import CategoryView from './components/CategoryView/CategoryView';
-import RecruitmentSection from './components/RecruitmentSection/RecruitmentSection';
-import { Box, Flex, Text, Button, ButtonGroup, Grid } from '@chakra-ui/react';
+import { Box, Grid, Text } from '@chakra-ui/react';
 import AffiliationViewButton from './components/AffiliationViewButton';
 import linkIcon from './assets/link_icon.svg';
 import cauIcon from './assets/CAU-logo.svg';
