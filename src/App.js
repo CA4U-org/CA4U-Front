@@ -6,7 +6,7 @@ import PostDetailPage from './PostDetailPage';
 import ClubVerificationPage from './ClubVerificationPage';
 import { MobileFrameWrapper } from './MobileFrameWrapper';
 import './shared/css/hideScrollbar.css';
-import Header from './Header';
+import { MyPage } from './page/MyPage';
 
 function App() {
   return (
@@ -27,6 +27,8 @@ function App() {
 
           {/* 동아리 소속 인증 페이지 */}
           <Route path="/verification" element={<ClubVerificationPage />} />
+
+          <Route path={'my'} element={<MyPage />} />
         </Routes>
       </Router>
     </MobileFrameWrapper>
