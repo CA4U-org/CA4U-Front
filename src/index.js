@@ -6,20 +6,6 @@ import './index.css';
 import App from './App';
 import { ChakraProvider } from '@chakra-ui/react';
 import { cauTheme } from './shared/CAUTheme';
-import { initializeApp } from 'firebase/app';
-
-const firebaseConfig = {
-  apiKey: 'AIzaSyCSLoTqZwqU2tvYCWG3v1eC5cHehbbnPGc',
-  authDomain: 'ca4u-75cbe.firebaseapp.com',
-  projectId: 'ca4u-75cbe',
-  storageBucket: 'ca4u-75cbe.appspot.com',
-  messagingSenderId: '572779157751',
-  appId: '1:572779157751:web:3fec59a523e16e887ddbf2',
-  measurementId: 'G-7FY38583K1',
-};
-
-//Firebase 초기화
-const app = initializeApp(firebaseConfig);
 
 const container = document.getElementById('root');
 const root = createRoot(container);
