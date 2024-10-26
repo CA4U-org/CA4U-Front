@@ -4,7 +4,7 @@ import { Introduction } from './Introduction';
 export function MobileFrameWrapper(props) {
   return (
     <Flex bg={'#eee'} w={'100vw'} className={'no-drag '}>
-      <Flex m={'0 auto'}>
+      <Flex m={'0 auto'} w={{ base: 'full', sm: 'auto' }}>
         <Show above={'sm'}>
           <Flex
             w={'sm'}
