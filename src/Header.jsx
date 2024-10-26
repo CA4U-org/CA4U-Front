@@ -3,16 +3,19 @@ import {
   Box,
   Flex,
   Image,
-  Text,
   Input,
   InputGroup,
   InputLeftElement,
+  Text,
 } from '@chakra-ui/react';
 import ca4uSVG from './assets/ca4u.svg';
 import myIcon from './assets/my-icon.svg';
 import searchIcon from './assets/search-icon.svg';
+import { useNavigate } from 'react-router-dom';
 
 const Header = () => {
+  const navigate = useNavigate();
+
   return (
     <Box bg="cauLightBlue" py={2} px={4} borderBottomRadius="2xl">
       <Flex flexDirection="column">
@@ -42,7 +45,14 @@ const Header = () => {
               </Text>
             </Flex>
           </Flex>
-          <Image src={myIcon} alt="내정보" height="2em" />
+          <Image
+            src={myIcon}
+            alt="내정보"
+            height="2em"
+            onClick={() => {
+              navigate('/my');
+            }}
+          />
         </Flex>
         <InputGroup size="xs">
           <InputLeftElement pointerEvents="none">
