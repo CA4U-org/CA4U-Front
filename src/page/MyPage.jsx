@@ -5,39 +5,58 @@ import { IoIosHeart } from 'react-icons/io';
 import { cauTheme } from '../shared/CAUTheme';
 import { FaCircleCheck } from 'react-icons/fa6';
 import { MdMessage } from 'react-icons/md';
+import { useEffect, useState } from 'react';
+import { getMember } from '../api/members/getMember';
+import { PageWrapper } from './PageWrapper';
 
 export function MyPage() {
+  const [member, setMember] = useState();
+  const [isLoading, setIsLoading] = useState(true);
+
+  useEffect(() => {
+    getMember('mock-1').then((m) => {
+      setMember(m);
+      setIsLoading(false);
+    });
+  }, []);
+
   return (
-    <Box w={'full'}>
+    <PageWrapper isLoading={isLoading}>
       <TopHeader title={'내 정보'} />
-      <Flex p={5} justify={'center'} align={'center'}>
-        <Image
-          src={'https://i.imgur.com/d56CAWR.png'}
-          boxSize={'90px'}
-          borderRadius={'full'}
-        />
-        <Flex direction={'column'} px={4} flexGrow={1}>
-          <Flex align={'center'}>
-            <Text fontWeight={'bolder'} fontSize={'xl'}>
-              김푸앙
-            </Text>
-            <Text fontSize={'sm'} ml={2} color={'gray'}>
-              20학번
-            </Text>
-          </Flex>
-          <Box mt={1}>
-            <Text color={'gray'} fontSize={'sm'}>
-              서울캠 경영경제대학
-            </Text>
-            <Text color={'gray'} fontSize={'sm'}>
-              경영학부 (경영학전공)
-            </Text>
-          </Box>
-        </Flex>
-      </Flex>
+      <Profile {...member} />
       <StaffGuide />
       <Menu />
-    </Box>
+    </PageWrapper>
+  );
+}
+
+function Profile(member) {
+  return (
+    <Flex w={'full'} p={5} justify={'center'} align={'center'}>
+      <Image
+        src={member.profileImageUrl}
+        boxSize={'90px'}
+        borderRadius={'full'}
+      />
+      <Flex direction={'column'} px={4} flexGrow={1}>
+        <Flex align={'center'}>
+          <Text fontWeight={'bolder'} fontSize={'xl'}>
+            {member.name}
+          </Text>
+          <Text fontSize={'sm'} ml={2} color={'gray'}>
+            {member.studentId.substring(2, 4) + '학번'}
+          </Text>
+        </Flex>
+        <Box mt={1}>
+          <Text color={'gray'} fontSize={'sm'}>
+            {member.department}
+          </Text>
+          <Text color={'gray'} fontSize={'sm'}>
+            {member.major}
+          </Text>
+        </Box>
+      </Flex>
+    </Flex>
   );
 }
 
@@ -60,7 +79,7 @@ function Menu() {
   ];
 
   return (
-    <Flex justify={'space-between'} py={3} px={10}>
+    <Flex w={'full'} justify={'space-between'} py={3}>
       {menuItems.map((item, index) => (
         <MenuItem key={index} icon={item.icon} title={item.title} />
       ))}
@@ -70,7 +89,7 @@ function Menu() {
 
 function MenuItem({ icon, title }) {
   return (
-    <Flex direction={'column'} align={'center'} mt={3}>
+    <Flex w="full" direction={'column'} align={'center'} mt={3}>
       {icon}
       {title.map((line, index) => (
         <Text fontSize={'sm'} mt={index === 0 ? 1 : 0} key={index}>
