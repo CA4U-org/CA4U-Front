@@ -1,4 +1,4 @@
-import { Box, Flex, Image, Text } from '@chakra-ui/react';
+import { Box, Flex, Heading, Image, Text } from '@chakra-ui/react';
 import TopHeader from '../components/TopHeader';
 import StaffGuide from '../components/StaffGuide/StaffGuide';
 import { IoIosHeart } from 'react-icons/io';
@@ -8,29 +8,42 @@ import { MdMessage } from 'react-icons/md';
 import { useEffect, useState } from 'react';
 import { getMember } from '../api/members/getMember';
 import { PageWrapper } from './PageWrapper';
+import { ClubRowCard } from '../components/club/ClubRowCard';
+import { getMyClubs } from '../api/club/getMyClubs';
 
 export function MyPage() {
   const [member, setMember] = useState();
   const [isLoading, setIsLoading] = useState(true);
+  const [myClubs, setMyClubs] = useState([]);
 
   useEffect(() => {
-    getMember('mock-1').then((m) => {
-      setMember(m);
-      setIsLoading(false);
-    });
+    // 모든 API 요청을 병렬로 처리
+    Promise.all([
+      getMember('mock-1'),
+      getMyClubs('mock-1'), // 예시로 사용자 ID를 전달했다고 가정
+    ])
+      .then(([memberData, clubsData]) => {
+        setMember(memberData);
+        setMyClubs(clubsData);
+        setIsLoading(false);
+      })
+      .catch((error) => {
+        console.error(error);
+      });
   }, []);
 
   return (
     <PageWrapper isLoading={isLoading}>
       <TopHeader title={'내 정보'} />
-      <Profile {...member} />
+      <Profile member={member} />
       <StaffGuide />
       <Menu />
+      <MyClubList clubs={myClubs} />
     </PageWrapper>
   );
 }
 
-function Profile(member) {
+function Profile({ member }) {
   return (
     <Flex w={'full'} p={5} justify={'center'} align={'center'}>
       <Image
@@ -97,5 +110,25 @@ function MenuItem({ icon, title }) {
         </Text>
       ))}
     </Flex>
+  );
+}
+
+function MyClubList({ clubs }) {
+  return (
+    <Box>
+      <Heading as="h4" size={'md'} ml={5}>
+        my 소속 동아리
+      </Heading>
+      <Flex
+        wrap={'nowrap'}
+        overflowX={'scroll'}
+        className={'hide-scrollbar'}
+        p={3}
+      >
+        {clubs.map((club, index) => (
+          <ClubRowCard key={index} club={club} />
+        ))}
+      </Flex>
+    </Box>
   );
 }
