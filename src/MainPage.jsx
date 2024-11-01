@@ -8,6 +8,7 @@ import AffiliationViewButton from './components/AffiliationViewButton';
 import linkIcon from './assets/link_icon.svg';
 import cauIcon from './assets/CAU-logo.svg';
 import puangIcon from './assets/푸앙-icon.svg';
+import { Navigate } from 'react-router-dom';
 
 export default function MainPage() {
   return (

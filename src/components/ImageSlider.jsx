@@ -1,15 +1,30 @@
 import React from 'react';
 import Slider from 'react-slick';
+import { Box, Image } from '@chakra-ui/react';
+import 'slick-carousel/slick/slick.css';
+import 'slick-carousel/slick/slick-theme.css';
 
 const ImageSlider = () => {
   const settings = {
-    dots: true, // 슬라이더 하단에 점을 표시할지 여부
-    infinite: true, // 무한 반복 여부
-    speed: 500, // 슬라이딩 속도
-    slidesToShow: 1, // 한 번에 보여줄 슬라이드 개수
-    slidesToScroll: 1, // 한 번에 스크롤할 슬라이드 개수
-    autoplay: false, // 자동 슬라이드
-    autoplaySpeed: 3000, // 자동 슬라이드 시간 (3초)
+    dots: true,
+    infinite: true,
+    speed: 500,
+    slidesToShow: 1,
+    slidesToScroll: 1,
+    autoplay: false,
+    autoplaySpeed: 3000,
+    arrows: true,
+    // 커스텀 dots 스타일
+    dotsClass: 'slick-dots custom-dots',
+    // 반응형 설정
+    responsive: [
+      {
+        breakpoint: 768,
+        settings: {
+          arrows: false, // 모바일에서는 화살표 숨김
+        },
+      },
+    ],
   };
 
   const images = [
@@ -21,16 +36,81 @@ const ImageSlider = () => {
   ];
 
   return (
-    <div style={{ width: '800px', margin: '0 auto' }}>
+    <Box
+      position="relative"
+      width="100%"
+      maxW="container.md"
+      mx="auto"
+      overflow="hidden"
+      sx={{
+        // Slick 커스텀 스타일
+        '.slick-slide': {
+          px: '1px', // 슬라이드 간 간격
+        },
+        '.slick-dots': {
+          bottom: '20px', // dots 위치 조정
+          li: {
+            mx: '2px', // dots 간 간격
+            button: {
+              _before: {
+                color: 'white', // dots 색상
+                fontSize: '8px', // dots 크기
+                opacity: 0.5,
+              },
+            },
+            '&.slick-active': {
+              button: {
+                _before: {
+                  opacity: 1,
+                },
+              },
+            },
+          },
+        },
+        '.slick-prev, .slick-next': {
+          zIndex: 1,
+          width: '40px',
+          height: '40px',
+          display: ['none', 'block'], // 모바일에서는 숨김
+          _before: {
+            color: 'white',
+            fontSize: '24px',
+          },
+        },
+        '.slick-prev': {
+          left: '20px',
+        },
+        '.slick-next': {
+          right: '20px',
+        },
+      }}
+    >
       <Slider {...settings}>
         {images.map((image, index) => (
-          <div key={index}>
-            <img src={image} alt={`Slide ${index}`} style={{ width: '100%' }} />
-          </div>
+          <Box key={index} position="relative" paddingTop="50%">
+            <Image
+              src={image}
+              alt={`Slide ${index + 1}`}
+              position="absolute"
+              top="0"
+              left="0"
+              w="100%"
+              h="100%"
+              objectFit="cover"
+              objectPosition="center"
+            />
+          </Box>
         ))}
       </Slider>
-    </div>
+    </Box>
   );
+};
+
+// Global styles to add in your App.js or theme file
+const globalStyles = {
+  '.slick-slider': {
+    touchAction: 'pan-y', // 모바일에서 더 나은 스와이프 경험
+  },
 };
 
 export default ImageSlider;

@@ -11,6 +11,9 @@ import LoginForm from './LoginForm';
 import SignUpForm from './SignUpForm';
 import ProtectedRoute from './components/ProtectedRoute';
 import CategoryPage from './CateogoryPage';
+import SearchPage from './SearchPage';
+import 'slick-carousel/slick/slick.css';
+import 'slick-carousel/slick/slick-theme.css';
 
 function App() {
   return (
@@ -22,6 +25,8 @@ function App() {
           <Route path="/signup" element={<SignUpForm />} />
           {/* 메인 페이지 */}
           <Route path="/" element={<MainPage />} />
+          {/* App.jsx에 추가할 라우트*/}
+          <Route path="/search" element={<SearchPage />} />
           {/* 동아리 상세 페이지 */}
           <Route path="/club/:clubId" element={<ClubDetailPage />} />
           {/* 게시글 상세 페이지 */}

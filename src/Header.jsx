@@ -16,6 +16,14 @@ import { useNavigate } from 'react-router-dom';
 const Header = () => {
   const navigate = useNavigate();
 
+  // 검색 이벤트 핸들러 추가
+  const handleSearch = (e) => {
+    if (e.key === 'Enter' && e.target.value.trim()) {
+      // 빈 검색어가 아닐 때만 검색
+      navigate(`/search?query=${encodeURIComponent(e.target.value.trim())}`);
+    }
+  };
+
   return (
     <Box bg="cauLightBlue" py={2} px={4} borderBottomRadius="2xl">
       <Flex flexDirection="column">
@@ -62,6 +70,7 @@ const Header = () => {
             placeholder="동아리를 검색해보세요 ex. 코딩, 밴드, 연극, 타박네"
             bg="white"
             width="100%"
+            onKeyUp={handleSearch}
           />
         </InputGroup>
       </Flex>
