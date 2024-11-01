@@ -16,13 +16,7 @@ export default function MainPage() {
       <Text mt={6} ml={4} fontSize="xl" fontWeight="bold">
         소속별로 보기
       </Text>
-      <Grid
-        templateColumns="repeat(3,1fr)"
-        gap={4}
-        width="full"
-        maxWidth="4xl"
-        mx="auto"
-      >
+      <Grid templateColumns="repeat(3,1fr)" gap={4} width="full" padding={4}>
         <AffiliationViewButton
           mainText="중앙"
           subText="동아리 연합회 소속"

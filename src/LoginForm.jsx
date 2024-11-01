@@ -19,8 +19,11 @@ import {
   Checkbox,
 } from '@chakra-ui/react';
 import { ViewIcon, ViewOffIcon } from '@chakra-ui/icons';
+import { useNavigate } from 'react-router-dom'; // 상단에 추가
 
 const LoginForm = () => {
+  const navigate = useNavigate(); // 추가
+
   const toast = useToast();
   const [showPassword, setShowPassword] = useState(false);
   const [formData, setFormData] = useState({
@@ -28,6 +31,11 @@ const LoginForm = () => {
     password: '',
     rememberMe: false,
   });
+
+  // 회원가입 버튼 클릭 핸들러
+  const handleSignUpClick = () => {
+    navigate('/signup');
+  };
 
   const handleChange = (e) => {
     const { name, value, type, checked } = e.target;
@@ -199,7 +207,7 @@ const LoginForm = () => {
               width="full"
               size="lg"
               fontSize="md"
-              onClick={() => console.log('회원가입 페이지로 이동')}
+              onClick={handleSignUpClick}
               _hover={{
                 bg: 'blue.50',
               }}

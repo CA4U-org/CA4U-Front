@@ -7,16 +7,15 @@ import App from './App';
 import { cauTheme } from './shared/CAUTheme';
 import { ChakraProvider } from '@chakra-ui/react';
 
-import SignUpForm from './components/Auth/SignUpForm';
-
-import LoginForm from './components/Auth/LoginForm';
+import SignUpForm from './SignUpForm';
+import LoginForm from './LoginForm';
 
 const container = document.getElementById('root');
 const root = createRoot(container);
 root.render(
   <React.StrictMode>
     <ChakraProvider theme={cauTheme}>
-      <LoginForm />
+      <App />{' '}
     </ChakraProvider>
   </React.StrictMode>
 );

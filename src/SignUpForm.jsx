@@ -19,8 +19,11 @@ import {
   Divider,
 } from '@chakra-ui/react';
 import { ViewIcon, ViewOffIcon } from '@chakra-ui/icons';
+import { useNavigate } from 'react-router-dom'; // 상단에 추가
+import LoginForm from './LoginForm';
 
 const SignUpForm = () => {
+  const navigate = useNavigate();
   const toast = useToast();
   const [showPassword, setShowPassword] = useState(false);
   const [formData, setFormData] = useState({
@@ -40,6 +43,10 @@ const SignUpForm = () => {
       ...prev,
       [name]: value,
     }));
+  };
+
+  const handleLoginClick = () => {
+    navigate('/login');
   };
 
   const handleSubmit = (e) => {
@@ -325,7 +332,7 @@ const SignUpForm = () => {
               width="full"
               size="lg"
               fontSize="md"
-              onClick={() => console.log('로그인 페이지로 이동')}
+              onClick={handleLoginClick}
               _hover={{
                 bg: 'blue.50',
               }}
