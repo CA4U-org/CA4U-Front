@@ -10,6 +10,7 @@ import { MyPage } from './page/MyPage';
 import LoginForm from './LoginForm';
 import SignUpForm from './SignUpForm';
 import ProtectedRoute from './components/ProtectedRoute';
+import CategoryPage from './CateogoryPage';
 
 function App() {
   return (
@@ -19,22 +20,19 @@ function App() {
           {/* 인증 관련 라우트 */}
           <Route path="/login" element={<LoginForm />} />
           <Route path="/signup" element={<SignUpForm />} />
-
           {/* 메인 페이지 */}
           <Route path="/" element={<MainPage />} />
-
           {/* 동아리 상세 페이지 */}
           <Route path="/club/:clubId" element={<ClubDetailPage />} />
-
           {/* 게시글 상세 페이지 */}
           <Route
             path="/club/:clubId/post/:postId"
             element={<PostDetailPage />}
           />
-
           {/* 동아리 소속 인증 페이지 */}
           <Route path="/verification" element={<ClubVerificationPage />} />
-
+          {/* App.jsx에 추가할 라우트 설정 // 기존 App.jsx의 Routes 내부에 추가*/}
+          <Route path="/category/:category" element={<CategoryPage />} />
           {/* 마이페이지 */}
           <Route path="/my" element={<MyPage />} />
         </Routes>
