@@ -4,15 +4,17 @@ import 'slick-carousel/slick/slick-theme.css';
 import React from 'react';
 import './index.css';
 import App from './App';
-import { ChakraProvider } from '@chakra-ui/react';
 import { cauTheme } from './shared/CAUTheme';
+import { ChakraProvider } from '@chakra-ui/react';
+
+import SignupForm from './components/Auth/SignupForm';
 
 const container = document.getElementById('root');
 const root = createRoot(container);
 root.render(
   <React.StrictMode>
     <ChakraProvider theme={cauTheme}>
-      <App />
+      <SignupForm />
     </ChakraProvider>
   </React.StrictMode>
 );
