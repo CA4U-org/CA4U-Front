@@ -12,13 +12,23 @@ import { useNavigate } from 'react-router-dom';
 function CategoryView() {
   const navigate = useNavigate();
 
+  const token = localStorage.getItem('accessToken');
+
+  const handleCategoryClick = (category) => {
+    if (!token) {
+      navigate('/login');
+      return;
+    }
+    navigate(`/category/${category}`);
+  };
+
   return (
     <div className={styles.mainContainer}>
       <div className={styles.gridContainer}>
         <div
           style={{ backgroundColor: '#D4EAFF' }}
           className={styles.gridItem}
-          onClick={() => navigate('/category/academic')}
+          onClick={() => handleCategoryClick('academic')}
         >
           <p className={styles.gridText}>학술</p>
           <img className={styles.icon} src={pencilIcon} alt="학술" />
@@ -26,7 +36,7 @@ function CategoryView() {
         <div
           style={{ backgroundColor: '#E2FFC5' }}
           className={styles.gridItem}
-          onClick={() => navigate('/category/culture')}
+          onClick={() => handleCategoryClick('culture')}
         >
           <p className={styles.gridText}>
             문화<br></br>예술
@@ -36,7 +46,7 @@ function CategoryView() {
         <div
           style={{ backgroundColor: '#FFEDD2' }}
           className={styles.gridItem}
-          onClick={() => navigate('/category/sports')}
+          onClick={() => handleCategoryClick('sports')}
         >
           <p className={styles.gridText}>운동</p>
           <img className={styles.icon} src={sportsIcon} alt="운동" />
@@ -44,7 +54,7 @@ function CategoryView() {
         <div
           style={{ backgroundColor: '#EFE3FF' }}
           className={styles.gridItem}
-          onClick={() => navigate('/category/hobby')}
+          onClick={() => handleCategoryClick('hobby')}
         >
           <p className={styles.gridText}>취미</p>
           <img className={styles.icon} src={hobbyIcon} alt="취미" />
@@ -52,7 +62,7 @@ function CategoryView() {
         <div
           style={{ backgroundColor: '#FFF8BC' }}
           className={styles.gridItem}
-          onClick={() => navigate('/category/religion')}
+          onClick={() => handleCategoryClick('religion')}
         >
           <p className={styles.gridText}>종교</p>
           <img className={styles.icon} src={religionIcon} alt="종교" />
@@ -60,7 +70,7 @@ function CategoryView() {
         <div
           style={{ backgroundColor: '#FFDADC' }}
           className={styles.gridItem}
-          onClick={() => navigate('/category/volunteer')}
+          onClick={() => handleCategoryClick('volunteer')}
         >
           <p className={styles.gridText}>봉사</p>
           <img className={styles.icon} src={volunteerIcon} alt="봉사" />

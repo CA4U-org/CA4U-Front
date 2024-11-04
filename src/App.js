@@ -10,10 +10,11 @@ import { MyPage } from './page/MyPage';
 import LoginForm from './LoginForm';
 import SignUpForm from './SignUpForm';
 import ProtectedRoute from './components/ProtectedRoute';
-import CategoryPage from './CateogoryPage';
+import CategoryPage from './CategoryPage';
 import SearchPage from './SearchPage';
 import 'slick-carousel/slick/slick.css';
 import 'slick-carousel/slick/slick-theme.css';
+import OAuth2RedirectHandler from './components/OAuth2RedirectHandler';
 
 function App() {
   return (
@@ -37,6 +38,7 @@ function App() {
           {/* 동아리 소속 인증 페이지 */}
           <Route path="/verification" element={<ClubVerificationPage />} />
           {/* App.jsx에 추가할 라우트 설정 // 기존 App.jsx의 Routes 내부에 추가*/}
+          <Route path="/oauth/redirect" element={<OAuth2RedirectHandler />} />
           <Route path="/category/:category" element={<CategoryPage />} />
           {/* 마이페이지 */}
           <Route path="/my" element={<MyPage />} />

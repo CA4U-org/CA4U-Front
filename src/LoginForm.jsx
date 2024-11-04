@@ -17,9 +17,12 @@ import {
   IconButton,
   Divider,
   Checkbox,
+  Image,
 } from '@chakra-ui/react';
 import { ViewIcon, ViewOffIcon } from '@chakra-ui/icons';
 import { useNavigate } from 'react-router-dom'; // 상단에 추가
+
+import googleLogo from './assets/google-logo-icon.png';
 
 const LoginForm = () => {
   const navigate = useNavigate(); // 추가
@@ -194,6 +197,33 @@ const LoginForm = () => {
               </Button>
             </VStack>
           </form>
+
+          <Divider my={6} borderColor="gray.200" />
+          {/* 구글 로그인 버튼 */}
+          <Button
+            width="full"
+            variant="outline"
+            size="lg"
+            onClick={() => {
+              // 프론트엔드 도메인으로 리다이렉트되도록 설정
+              const frontendURL = 'http://localhost:3000'; // 현재 프론트엔드 도메인
+              const redirectUri = `${frontendURL}/oauth/redirect`; // 로그인 후 리다이렉트될 경로
+
+              window.location.href = `http://ec2-15-165-135-235.ap-northeast-2.compute.amazonaws.com:8080/oauth2/authorization/google?redirect_uri=${encodeURIComponent(redirectUri)}`;
+            }}
+            py={6}
+            mb={4}
+            display="flex"
+            alignItems="center"
+            justifyContent="center"
+            gap={2}
+            _hover={{
+              bg: 'gray.50',
+            }}
+          >
+            <Image src={googleLogo} alt="Google Logo" boxSize="24px" />
+            Google 계정으로 로그인
+          </Button>
 
           <Divider my={6} borderColor="gray.200" />
 

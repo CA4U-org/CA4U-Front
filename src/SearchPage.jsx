@@ -1,5 +1,5 @@
 // SearchPage.jsx
-import React from 'react';
+import React, { useState, useEffect } from 'react';
 import {
   Box,
   VStack,
@@ -18,6 +18,7 @@ import {
 } from '@chakra-ui/react';
 import { ChevronLeftIcon, SearchIcon } from '@chakra-ui/icons';
 import { useNavigate, useSearchParams } from 'react-router-dom';
+import { searchClubs } from './api/club/clubApi';
 
 // 모크 데이터 생성
 const mockClubs = [
@@ -39,12 +40,35 @@ const SearchPage = () => {
   const [searchParams] = useSearchParams();
   const searchQuery = searchParams.get('query') || '';
 
+  const [searchResults, setSearchResults] = useState([]);
+  const [loading, setLoading] = useState(false);
+
+  useEffect(() => {
+    const fetchSearchResults = async () => {
+      if (!searchQuery) return;
+
+      setLoading(true);
+
+      try {
+        const results = await searchClubs(searchQuery);
+        setSearchResults = results;
+      } catch (error) {
+        console.error('search failed', error);
+        //에러 로직 추가
+      } finally {
+        setLoading(false);
+      }
+    };
+    fetchSearchResults();
+  }, [searchQuery]);
+
   // 실제 구현시에는 여기에 검색 로직 추가
-  const searchResults = mockClubs.filter(
+  /*const searchResults = mockClubs.filter(
     (club) =>
       club.name.toLowerCase().includes(searchQuery.toLowerCase()) ||
       club.description.toLowerCase().includes(searchQuery.toLowerCase())
   );
+  */
 
   return (
     <Box bg="gray.50" minH="100vh">
@@ -71,7 +95,7 @@ const SearchPage = () => {
             <Input
               placeholder="동아리를 검색해보세요"
               defaultValue={searchQuery}
-              onKeyPress={(e) => {
+              onKeyUp={(e) => {
                 if (e.key === 'Enter') {
                   navigate(`/search?query=${e.target.value}`);
                 }
