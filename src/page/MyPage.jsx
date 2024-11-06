@@ -1,4 +1,4 @@
-import { Box, Flex, Heading, Image, Text } from '@chakra-ui/react';
+import { Box, Button, Flex, Heading, Image, Text } from '@chakra-ui/react';
 import TopHeader from '../components/TopHeader';
 import StaffGuide from '../components/StaffGuide/StaffGuide';
 import { IoIosHeart } from 'react-icons/io';
@@ -6,44 +6,28 @@ import { cauTheme } from '../shared/CAUTheme';
 import { FaCircleCheck } from 'react-icons/fa6';
 import { MdMessage } from 'react-icons/md';
 import { useEffect, useState } from 'react';
-import { getMember } from '../api/members/getMember';
 import { PageWrapper } from './PageWrapper';
 import { ClubRowCard } from '../components/club/ClubRowCard';
 import { getMyClubs } from '../api/club/getMyClubs';
-import axios from 'axios';
-import { SERVER_URL } from '../shared/const/consts';
+import { useAuth } from '../shared/useAuth';
+import { useNavigate } from 'react-router-dom';
 
 export function MyPage() {
-  const [member, setMember] = useState();
+  const { user } = useAuth();
   const [isLoading, setIsLoading] = useState(true);
   const [myClubs, setMyClubs] = useState([]);
 
   useEffect(() => {
-    axios
-      .get(`${SERVER_URL}/user-info`, {
-        withCredentials: true,
-      })
-      .then(console.log);
-
-    // 모든 API 요청을 병렬로 처리
-    Promise.all([
-      getMember('mock-1'),
-      getMyClubs('mock-1'), // 예시로 사용자 ID를 전달했다고 가정
-    ])
-      .then(([memberData, clubsData]) => {
-        setMember(memberData);
-        setMyClubs(clubsData);
-        setIsLoading(false);
-      })
-      .catch((error) => {
-        console.error(error);
-      });
+    getMyClubs().then((res) => {
+      setMyClubs(res);
+      setIsLoading(false);
+    });
   }, []);
 
   return (
     <PageWrapper isLoading={isLoading}>
       <TopHeader title={'내 정보'} />
-      <Profile member={member} />
+      {user ? <Profile user={user} /> : <NoUserProfile />}
       <StaffGuide />
       <Menu />
       <MyClubList clubs={myClubs} />
@@ -51,31 +35,49 @@ export function MyPage() {
   );
 }
 
-function Profile({ member }) {
+function Profile({ user }) {
   return (
     <Flex w={'full'} p={5} justify={'center'} align={'center'}>
       <Image
-        src={member.profileImageUrl}
+        src={'https://i.imgur.com/d56CAWR.png'}
         boxSize={'90px'}
         borderRadius={'full'}
       />
       <Flex direction={'column'} px={4} flexGrow={1}>
         <Flex align={'center'}>
           <Text fontWeight={'bolder'} fontSize={'xl'}>
-            {member.name}
+            {user.email}
           </Text>
           <Text fontSize={'sm'} ml={2} color={'gray'}>
-            {member.studentId.substring(2, 4) + '학번'}
+            {'19학번'}
           </Text>
         </Flex>
         <Box mt={1}>
           <Text color={'gray'} fontSize={'sm'}>
-            {member.department}
+            {'경영경제대학'}
           </Text>
           <Text color={'gray'} fontSize={'sm'}>
-            {member.major}
+            {'경영학과'}
           </Text>
         </Box>
+      </Flex>
+    </Flex>
+  );
+}
+
+function NoUserProfile() {
+  const navigate = useNavigate();
+  return (
+    <Flex w={'full'} p={5} justify={'center'} align={'center'}>
+      <Image
+        src={'https://i.imgur.com/d56CAWR.png'}
+        boxSize={'90px'}
+        borderRadius={'full'}
+      />
+      <Flex direction={'column'} px={4} flexGrow={1} textAlign={'center'}>
+        <Button colorScheme={'blue'} onClick={() => navigate('/login')}>
+          로그인
+        </Button>
       </Flex>
     </Flex>
   );
@@ -100,7 +102,7 @@ function Menu() {
   ];
 
   return (
-    <Flex w={'full'} justify={'space-between'} py={3}>
+    <Flex w={'full'} justify={'space-between'} py={5}>
       {menuItems.map((item, index) => (
         <MenuItem key={index} icon={item.icon} title={item.title} />
       ))}
