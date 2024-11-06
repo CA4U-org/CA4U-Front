@@ -9,7 +9,6 @@ import './shared/css/hideScrollbar.css';
 import { MyPage } from './page/MyPage';
 import LoginForm from './LoginForm';
 import SignUpForm from './SignUpForm';
-import ProtectedRoute from './components/ProtectedRoute';
 import CategoryPage from './CategoryPage';
 import SearchPage from './SearchPage';
 import 'slick-carousel/slick/slick.css';

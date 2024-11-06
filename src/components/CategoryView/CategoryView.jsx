@@ -12,13 +12,7 @@ import { useNavigate } from 'react-router-dom';
 function CategoryView() {
   const navigate = useNavigate();
 
-  const token = localStorage.getItem('accessToken');
-
   const handleCategoryClick = (category) => {
-    if (!token) {
-      navigate('/login');
-      return;
-    }
     navigate(`/category/${category}`);
   };
 
