@@ -62,14 +62,14 @@ const Header = () => {
             }}
           />
         </Flex>
-        <InputGroup size="xs">
+        <InputGroup size="sm" mt={2} mb={1}>
           <InputLeftElement pointerEvents="none">
             <Image src={searchIcon} alt="검색" height="1.5em"></Image>
           </InputLeftElement>
           <Input
+            borderRadius={'lg'}
             placeholder="동아리를 검색해보세요 ex. 코딩, 밴드, 연극, 타박네"
             bg="white"
-            width="100%"
             onKeyUp={handleSearch}
           />
         </InputGroup>
