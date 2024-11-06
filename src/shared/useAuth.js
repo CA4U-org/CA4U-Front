@@ -11,7 +11,7 @@ export const AuthProvider = ({ children }) => {
   useEffect(() => {
     getMe().then((res) => {
       if (res.success) {
-        setUser(res.data);
+        setUser(res.result);
       } else if (res.message === '로그인이 필요합니다.') {
         setUser(null);
       }
@@ -28,6 +28,12 @@ export const AuthProvider = ({ children }) => {
   );
 };
 
+/**
+ * 로그인 정보가 필요할 때는 useAuth hook을 통해 정보를 주입받습니다.
+ * const { user }  = useAuth();
+ * 만약 user가 null이라면 로그인이 안되어있는 상태입니다.
+ * @returns {{}}
+ */
 export function useAuth() {
   const context = useContext(AuthContext);
   if (!context) {
