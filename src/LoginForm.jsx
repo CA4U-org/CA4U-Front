@@ -1,27 +1,26 @@
 import React, { useState } from 'react';
 import {
   Box,
-  VStack,
-  FormControl,
-  FormLabel,
-  Input,
   Button,
   Card,
   CardBody,
   CardHeader,
+  Checkbox,
+  Divider,
+  FormControl,
+  FormLabel,
   Heading,
-  useToast,
-  Text,
+  IconButton,
+  Image,
+  Input,
   InputGroup,
   InputRightElement,
-  IconButton,
-  Divider,
-  Checkbox,
-  Image,
+  Text,
+  useToast,
+  VStack,
 } from '@chakra-ui/react';
 import { ViewIcon, ViewOffIcon } from '@chakra-ui/icons';
 import { useNavigate } from 'react-router-dom'; // 상단에 추가
-
 import googleLogo from './assets/google-logo-icon.png';
 
 const LoginForm = () => {
@@ -206,10 +205,7 @@ const LoginForm = () => {
             size="lg"
             onClick={() => {
               // 프론트엔드 도메인으로 리다이렉트되도록 설정
-              const frontendURL = 'http://localhost:3000'; // 현재 프론트엔드 도메인
-              const redirectUri = `${frontendURL}/oauth/redirect`; // 로그인 후 리다이렉트될 경로
-
-              window.location.href = `http://ec2-15-165-135-235.ap-northeast-2.compute.amazonaws.com:8080/oauth2/authorization/google?redirect_uri=${encodeURIComponent(redirectUri)}`;
+              window.location.href = `https://backend.ca4u.store/oauth2/authorization/google`;
             }}
             py={6}
             mb={4}

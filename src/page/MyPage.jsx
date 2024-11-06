@@ -10,6 +10,8 @@ import { getMember } from '../api/members/getMember';
 import { PageWrapper } from './PageWrapper';
 import { ClubRowCard } from '../components/club/ClubRowCard';
 import { getMyClubs } from '../api/club/getMyClubs';
+import axios from 'axios';
+import { SERVER_URL } from '../shared/const/consts';
 
 export function MyPage() {
   const [member, setMember] = useState();
@@ -17,6 +19,12 @@ export function MyPage() {
   const [myClubs, setMyClubs] = useState([]);
 
   useEffect(() => {
+    axios
+      .get(`${SERVER_URL}/user-info`, {
+        withCredentials: true,
+      })
+      .then(console.log);
+
     // 모든 API 요청을 병렬로 처리
     Promise.all([
       getMember('mock-1'),
