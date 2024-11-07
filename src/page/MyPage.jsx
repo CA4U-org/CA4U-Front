@@ -27,13 +27,13 @@ export function MyPage() {
   }, []);
 
   return (
-    <PageWrapper isLoading={isLoading}>
+    <PageWrapper isLoading={isLoading} bgColor={'#f6f6f6'}>
       <TopHeader title={'내 정보'} />
       {user ? <Profile user={user} /> : <NoUserProfile />}
       <StaffGuide />
-      <Menu />
-      <RelatedClubList />
-      <MyClubList clubs={myClubs} />
+      <MenuItemList />
+      {/*<RelatedClubList />*/}
+      {/*<MyClubList clubs={myClubs} />*/}
     </PageWrapper>
   );
 }
@@ -86,9 +86,9 @@ function NoUserProfile() {
   );
 }
 
-function Menu() {
+function MenuItemList() {
   const cauColors = cauTheme.colors;
-  const menuItemSize = '40';
+  const menuItemSize = '35px';
   const menuItems = [
     {
       icon: <IoIosHeart size={menuItemSize} color={cauColors.cauRed} />,
@@ -105,24 +105,50 @@ function Menu() {
   ];
 
   return (
-    <Flex w={'full'} justify={'space-between'} py={5}>
+    <Flex justify={'space-between'} bg={'white'} m={3} wrap={'wrap'}>
       {menuItems.map((item, index) => (
         <MenuItem key={index} icon={item.icon} title={item.title} />
       ))}
+      <DummyMenuItem />
     </Flex>
   );
 }
 
 function MenuItem({ icon, title }) {
   return (
-    <Flex w="full" direction={'column'} align={'center'} mt={3}>
+    <Flex
+      w="full"
+      direction={'column'}
+      justify={'center'}
+      align={'center'}
+      m={1}
+      boxSize={'75px'}
+      _hover={{
+        bg: 'gray.100',
+        borderRadius: 'lg',
+      }}
+    >
       {icon}
       {title.map((line, index) => (
-        <Text fontSize={'sm'} mt={index === 0 ? 1 : 0} key={index}>
+        <Text fontSize={'xs'} mt={index === 0 ? 1 : 0} key={index}>
           {line}
         </Text>
       ))}
     </Flex>
+  );
+}
+
+function DummyMenuItem() {
+  return (
+    <Flex
+      w="full"
+      direction={'column'}
+      justify={'center'}
+      align={'center'}
+      m={1}
+      boxSize={'75px'}
+      borderRadius={'lg'}
+    />
   );
 }
 
@@ -147,8 +173,8 @@ function RelatedClubList() {
   }
 
   return (
-    <Box>
-      <Heading as="h4" size={'md'} ml={5}>
+    <Box bgColor={'white'} m={3} borderRadius={'md'}>
+      <Heading as="h4" size={'md'} pt={4} pl={4}>
         최근 조회한 동아리와 비슷한 동아리
       </Heading>
       <ClubRowCardList>
@@ -162,8 +188,8 @@ function RelatedClubList() {
 
 function MyClubList({ clubs }) {
   return (
-    <Box>
-      <Heading as="h4" size={'md'} ml={5}>
+    <Box bgColor={'white'} m={3} borderRadius={'md'}>
+      <Heading as="h4" size={'md'} pt={4} pl={4}>
         my 소속 동아리
       </Heading>
       <ClubRowCardList>
