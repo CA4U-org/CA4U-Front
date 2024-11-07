@@ -11,11 +11,9 @@ import { AuthProvider } from './shared/useAuth';
 const container = document.getElementById('root');
 const root = createRoot(container);
 root.render(
-  <React.StrictMode>
-    <ChakraProvider theme={cauTheme}>
-      <AuthProvider>
-        <App />
-      </AuthProvider>
-    </ChakraProvider>
-  </React.StrictMode>
+  <ChakraProvider theme={cauTheme}>
+    <AuthProvider>
+      <App />
+    </AuthProvider>
+  </ChakraProvider>
 );

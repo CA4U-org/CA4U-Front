@@ -1,9 +1,10 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 import ClubImageSlider from './components/ClubImageSlider';
 import ClubInfo from './components/ClubInfo';
-import { Text, Box, Button, Image, Flex, IconButton } from '@chakra-ui/react';
-import { useNavigate } from 'react-router-dom';
+import { Box, Button, Flex, IconButton, Image, Text } from '@chakra-ui/react';
+import { useNavigate, useParams } from 'react-router-dom';
 import { ChevronLeftIcon } from '@chakra-ui/icons';
+import { addRecentViewedClub } from './feature/recent-viewed-club/addRecentViewedClub';
 
 const clubImages = [
   'https://s3-alpha-sig.figma.com/img/b27c/4fdf/1fb1d8ab73cfac58d71268a454dfb893?Expires=1728864000&Key-Pair-Id=APKAQ4GOSFWCVNEHN3O4&Signature=qf9gbewLVYeOZfe8N1XBVRx1adlc~TdHlOnxYUl5D1wPE8DScvmVjJHccR4RZJ08Y~gut1Dd2~lpw55uIFpH3t60F6zFSJ2lFMcmVJ~gQO32Ggh66M--ho5KTZloxRsdOwUbSVKFqUkPb4YE5cPRXA~2V-1xi1~bnn2UJYk3dk8-9~5aQhwNqrbgavEAe4LpI44kHdWHevcXHjFskC9wfkxkfPxGc2Vu8sfP4FCgHcN8dbkqVIJf5yrxfx7Zwq2mlfpMsft2iTXNG-J-jtAWiyMQdQzFnJReAT4TChHhII4rJVCjUcqosbcCF6g8Q0usJNETMRd3Ud3s0fGtN7C3eA__',
@@ -21,10 +22,15 @@ const activityIcon =
 
 const ClubDetailPage = () => {
   const navigate = useNavigate();
+  const { clubId } = useParams();
 
   const handleClick = () => {
     navigate('/club-images');
   };
+
+  useEffect(() => {
+    addRecentViewedClub(clubId);
+  }, []);
 
   return (
     <Box
