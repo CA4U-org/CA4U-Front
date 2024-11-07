@@ -1,12 +1,4 @@
-import {
-  Box,
-  Button,
-  Flex,
-  Heading,
-  Image,
-  Show,
-  Text,
-} from '@chakra-ui/react';
+import { Box, Button, Flex, Heading, Image, Text } from '@chakra-ui/react';
 import TopHeader from '../components/TopHeader';
 import StaffGuide from '../components/StaffGuide/StaffGuide';
 import { IoIosHeart } from 'react-icons/io';
@@ -150,19 +142,21 @@ function RelatedClubList() {
     }
   }, []);
 
+  if (!isRecentViewedClubExists) {
+    return null;
+  }
+
   return (
-    <Show ssr={isRecentViewedClubExists}>
-      <Box>
-        <Heading as="h4" size={'md'} ml={5}>
-          최근 조회한 동아리와 비슷한 동아리
-        </Heading>
-        <ClubRowCardList>
-          {relatedClubs.map((club, index) => (
-            <ClubRowCard key={index} club={club} />
-          ))}
-        </ClubRowCardList>
-      </Box>
-    </Show>
+    <Box>
+      <Heading as="h4" size={'md'} ml={5}>
+        최근 조회한 동아리와 비슷한 동아리
+      </Heading>
+      <ClubRowCardList>
+        {relatedClubs.map((club, index) => (
+          <ClubRowCard key={index} club={club} />
+        ))}
+      </ClubRowCardList>
+    </Box>
   );
 }
 
