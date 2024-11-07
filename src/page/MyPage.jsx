@@ -115,7 +115,7 @@ function MenuItemList() {
     },
     {
       icon: <FaCircleCheck size={menuItemSize} color={'green'} />,
-      title: ['소속 인증', '하러가기'],
+      title: ['소속 인증'],
     },
     {
       icon: <MdMessage size={menuItemSize} color={cauColors.cauBlue} />,
