@@ -2,17 +2,13 @@
 import axios from 'axios';
 
 const instance = axios.create({
-  baseURL:
-    'http://ec2-15-165-135-235.ap-northeast-2.compute.amazonaws.com:8080/api',
+  baseURL: 'https://backend.ca4u.store',
 });
 
 // 요청 인터셉터 추가
 instance.interceptors.request.use(
   (config) => {
-    const token = localStorage.getItem('accessToken');
-    if (token) {
-      config.headers.Authorization = `Bearer ${token}`;
-    }
+    config.withCredentials = true;
     return config;
   },
   (error) => {
