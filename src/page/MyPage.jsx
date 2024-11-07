@@ -13,6 +13,7 @@ import { useAuth } from '../shared/useAuth';
 import { useNavigate } from 'react-router-dom';
 import { ClubRowCardList } from '../components/club/ClubRowCardList';
 import { getRecentViewedClubs } from '../feature/recent-viewed-club/getRecentViewedClubs';
+import { logout } from '../api/members/logout';
 
 export function MyPage() {
   const { user } = useAuth();
@@ -34,6 +35,24 @@ export function MyPage() {
       <MenuItemList />
       {/*<RelatedClubList />*/}
       {/*<MyClubList clubs={myClubs} />*/}
+      {user && (
+        <Flex m={3} justify={'center'}>
+          <Text
+            color={'gray.500'}
+            onClick={() => {
+              logout().then(() => {
+                window.location.reload();
+              });
+            }}
+            _hover={{
+              cursor: 'pointer',
+              color: 'gray.700',
+            }}
+          >
+            로그아웃
+          </Text>
+        </Flex>
+      )}
     </PageWrapper>
   );
 }
