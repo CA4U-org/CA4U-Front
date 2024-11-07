@@ -1,4 +1,12 @@
-import { Box, Button, Flex, Heading, Image, Text } from '@chakra-ui/react';
+import {
+  Box,
+  Button,
+  Flex,
+  Heading,
+  Image,
+  Show,
+  Text,
+} from '@chakra-ui/react';
 import TopHeader from '../components/TopHeader';
 import StaffGuide from '../components/StaffGuide/StaffGuide';
 import { IoIosHeart } from 'react-icons/io';
@@ -11,6 +19,8 @@ import { ClubRowCard } from '../components/club/ClubRowCard';
 import { getMyClubs } from '../api/club/getMyClubs';
 import { useAuth } from '../shared/useAuth';
 import { useNavigate } from 'react-router-dom';
+import { ClubRowCardList } from '../components/club/ClubRowCardList';
+import { getRecentViewedClubs } from '../feature/recent-viewed-club/getRecentViewedClubs';
 
 export function MyPage() {
   const { user } = useAuth();
@@ -30,6 +40,7 @@ export function MyPage() {
       {user ? <Profile user={user} /> : <NoUserProfile />}
       <StaffGuide />
       <Menu />
+      <RelatedClubList />
       <MyClubList clubs={myClubs} />
     </PageWrapper>
   );
@@ -123,22 +134,49 @@ function MenuItem({ icon, title }) {
   );
 }
 
+function RelatedClubList() {
+  const [isRecentViewedClubExists, setIsRecentViewedClubExists] =
+    useState(false);
+  const [relatedClubs, setRelatedClubs] = useState([]);
+
+  useEffect(() => {
+    const recentViewedClubs = getRecentViewedClubs();
+
+    if (recentViewedClubs.length > 0) {
+      setIsRecentViewedClubExists(true);
+      getMyClubs().then((res) => {
+        setRelatedClubs(res);
+      });
+    }
+  }, []);
+
+  return (
+    <Show ssr={isRecentViewedClubExists}>
+      <Box>
+        <Heading as="h4" size={'md'} ml={5}>
+          최근 조회한 동아리와 비슷한 동아리
+        </Heading>
+        <ClubRowCardList>
+          {relatedClubs.map((club, index) => (
+            <ClubRowCard key={index} club={club} />
+          ))}
+        </ClubRowCardList>
+      </Box>
+    </Show>
+  );
+}
+
 function MyClubList({ clubs }) {
   return (
     <Box>
       <Heading as="h4" size={'md'} ml={5}>
         my 소속 동아리
       </Heading>
-      <Flex
-        wrap={'nowrap'}
-        overflowX={'scroll'}
-        className={'hide-scrollbar'}
-        p={3}
-      >
+      <ClubRowCardList>
         {clubs.map((club, index) => (
           <ClubRowCard key={index} club={club} />
         ))}
-      </Flex>
+      </ClubRowCardList>
     </Box>
   );
 }
