@@ -12,6 +12,13 @@ export const AuthProvider = ({ children }) => {
     getMe().then((res) => {
       if (res.success) {
         setUser(res.result);
+
+        if (
+          res.result.registered === false &&
+          window.location.pathname !== '/register'
+        ) {
+          window.location.href = '/register';
+        }
       } else if (res.message === '로그인이 필요합니다.') {
         setUser(null);
       }

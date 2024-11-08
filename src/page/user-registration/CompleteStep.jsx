@@ -32,7 +32,7 @@ export function CompleteStep({ name, department, major }) {
           mt={3}
           colorScheme={'blue'}
           onClick={() => {
-            navigate('/');
+            window.location.href = '/';
           }}
         >
           동아리 보러 가기
