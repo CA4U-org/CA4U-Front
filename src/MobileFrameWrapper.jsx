@@ -16,6 +16,7 @@ export function MobileFrameWrapper(props) {
           </Flex>
         </Show>
         <Box
+          position={'relative'}
           w={{ base: 'full', sm: '375px' }}
           h={'100vh'}
           overflowY={'scroll'}

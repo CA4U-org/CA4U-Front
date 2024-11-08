@@ -14,6 +14,7 @@ import SearchPage from './SearchPage';
 import 'slick-carousel/slick/slick.css';
 import 'slick-carousel/slick/slick-theme.css';
 import OAuth2RedirectHandler from './components/OAuth2RedirectHandler';
+import { UserRegistrationPage } from './page/user-registration/UserRegistrationPage';
 
 function App() {
   return (
@@ -41,6 +42,7 @@ function App() {
           <Route path="/category/:category" element={<CategoryPage />} />
           {/* 마이페이지 */}
           <Route path="/my" element={<MyPage />} />
+          <Route path="/register" element={<UserRegistrationPage />} />
         </Routes>
       </Router>
     </MobileFrameWrapper>
