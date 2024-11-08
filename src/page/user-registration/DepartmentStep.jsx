@@ -3,7 +3,7 @@ import { Heading, Select } from '@chakra-ui/react';
 import { UserRegistrationStepPageWrapper } from './UserRegistrationStepPageWrapper';
 
 export function DepartmentStep({ name, onNext }) {
-  const [department, setDepartment] = useState('');
+  const [department, setDepartment] = useState('인문대학');
   return (
     <UserRegistrationStepPageWrapper
       title={'단과대 선택'}

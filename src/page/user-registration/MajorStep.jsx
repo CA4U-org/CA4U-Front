@@ -1,4 +1,4 @@
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 import { Heading, Select } from '@chakra-ui/react';
 import { UserRegistrationStepPageWrapper } from './UserRegistrationStepPageWrapper';
 
@@ -94,6 +94,12 @@ export function MajorStep({ name, department, onNext }) {
     default:
       majorList = [];
   }
+
+  useEffect(() => {
+    if (majorList.length > 0) {
+      setMajor(majorList[0]); // 첫 번째 항목을 기본값으로 설정
+    }
+  }, [department]);
 
   return (
     <UserRegistrationStepPageWrapper
