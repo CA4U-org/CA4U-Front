@@ -26,4 +26,13 @@ export class EncodedLocalStorage {
       return null;
     }
   }
+
+  static deleteItem(key) {
+    try {
+      const encodedKey = btoa(encodeURIComponent(key)); // Base64 인코딩
+      localStorage.removeItem(encodedKey);
+    } catch (e) {
+      console.error('Error deleting value from localStorage:', e);
+    }
+  }
 }

@@ -14,6 +14,8 @@ import { useNavigate } from 'react-router-dom';
 import { ClubRowCardList } from '../components/club/ClubRowCardList';
 import { getRecentViewedClubs } from '../feature/recent-viewed-club/getRecentViewedClubs';
 import { logout } from '../api/members/logout';
+import { getRelatedClubs } from '../api/recommend/getRelatedClubs';
+import { clearRecentViewedClubs } from '../feature/recent-viewed-club/clearRecentViewedClubs';
 
 export function MyPage() {
   const { user } = useAuth();
@@ -37,7 +39,7 @@ export function MyPage() {
       {user ? <Profile user={user} /> : <NoUserProfile />}
       <StaffGuide />
       <MenuItemList />
-      {/*<RelatedClubList />*/}
+      <RelatedClubList />
       {/*<MyClubList clubs={myClubs} />*/}
       {user && (
         <Flex m={3} justify={'center'}>
@@ -197,9 +199,14 @@ function RelatedClubList() {
 
     if (recentViewedClubs.length > 0) {
       setIsRecentViewedClubExists(true);
-      getMyClubs().then((res) => {
-        setRelatedClubs(res);
-      });
+      getRelatedClubs(recentViewedClubs[recentViewedClubs.length - 1]).then(
+        (res) => {
+          console.log(res.result);
+          setRelatedClubs(res.result);
+        }
+      );
+
+      clearRecentViewedClubs();
     }
   }, []);
 
@@ -208,9 +215,9 @@ function RelatedClubList() {
   }
 
   return (
-    <Box bgColor={'white'} m={3} borderRadius={'md'}>
+    <Box bgColor={'white'} m={3}>
       <Heading as="h4" size={'md'} pt={4} pl={4}>
-        최근 조회한 동아리와 비슷한 동아리
+        AI 기반으로 추천해드려요
       </Heading>
       <ClubRowCardList>
         {relatedClubs.map((club, index) => (
