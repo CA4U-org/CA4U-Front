@@ -17,6 +17,7 @@ import {
 } from '@chakra-ui/react';
 
 const ClubTags = () => {
+  // TODO: 카테고리 정보가 API에 없는 것 같아서 임시로 유지
   const tags = ['동아리연합회', '문화예술', '중규모', '상시 모집'];
 
   return (
@@ -37,7 +38,7 @@ const ClubTags = () => {
   );
 };
 
-const RecruitmentInfo = () => {
+const RecruitmentInfo = ({ clubDetail }) => {
   return (
     <Box
       mt="4"
@@ -55,49 +56,44 @@ const RecruitmentInfo = () => {
           <Text as="span" fontWeight="bold">
             선발 대상:
           </Text>{' '}
-          중앙대학교 학생 누구나
+          {clubDetail.targetPeopleDescription}
         </ListItem>
         <ListItem fontSize="sm">
           <Text as="span" fontWeight="bold">
             선발 주기:
           </Text>{' '}
-          상시 모집
+          {clubDetail.targetCycleDescription}
         </ListItem>
         <ListItem fontSize="sm">
           <Text as="span" fontWeight="bold">
             지원 방법:
           </Text>{' '}
-          지원 시 무조건 합격
+          {clubDetail.applyDescription}
         </ListItem>
         <ListItem fontSize="sm">
           <Text as="span" fontWeight="bold">
             활동 요일:
           </Text>{' '}
-          ○○
+          {clubDetail.actDayDescription}
         </ListItem>
         <ListItem fontSize="sm">
           <Text as="span" fontWeight="bold">
             활동 장소:
           </Text>{' '}
-          107관 602호
-        </ListItem>
-        <ListItem fontSize="sm">
-          <Text as="span" fontWeight="bold">
-            회원 수:
-          </Text>{' '}
-          64명
+          {clubDetail.locationDescription}
         </ListItem>
         <ListItem fontSize="sm">
           <Text as="span" fontWeight="bold">
             회비:
           </Text>{' '}
-          신입 부원 없음, 기존 부원 3만원(1년)
+          {clubDetail.costDescription}원
         </ListItem>
       </List>
     </Box>
   );
 };
 
+// Notice 컴포넌트는 API에 해당 데이터가 없어서 임시로 유지하거나 제거
 const Notice = () => {
   return (
     <Box
@@ -129,17 +125,22 @@ const Notice = () => {
   );
 };
 
-const ClubInfo = () => {
+const ClubInfo = ({ clubDetail }) => {
+  if (!clubDetail) return null;
+
   return (
     <Container maxW="container.md" p="4">
       <VStack align="stretch" spacing="4">
         <Flex justify="space-between" align="center">
           <Box>
             <Heading as="h1" size="lg">
-              타박네
+              {clubDetail.clubNm}
             </Heading>
             <Text color="gray.600" fontSize="sm">
-              중앙대학교 극예술 연구회 since 1989
+              {clubDetail.briefDescription}
+            </Text>
+            <Text color="gray.500" fontSize="xs">
+              Last updated: {clubDetail.updatedAt}
             </Text>
           </Box>
           <HStack spacing="4">
@@ -149,21 +150,20 @@ const ClubInfo = () => {
         </Flex>
 
         <ClubTags />
-        <RecruitmentInfo />
+        <RecruitmentInfo clubDetail={clubDetail} />
         <Notice />
 
         <Box mt="6">
           <Heading as="h2" size="md" mb="2">
-            About 타박네
+            About {clubDetail.clubNm}
           </Heading>
-          <Text fontSize="sm" color="gray.600" lineHeight="tall">
-            삶의 연극, 사람의 연극 중앙대학교 극예술 연구회 타박네입니다. <br />
-            기성연극에 얽매이지 않고 극단적인 실험과 도전을 통해 무대를
-            사랑하고! 인간을 표현하는! 가장 뛰어난 극단을 추구하는 우리는 극연
-            타박네입니다! <br />
-            무대는 타박네, 당신과 함께! 30년 이상의 전통을 자랑하는 우리를
-            만나보세요! <br />
-            활동은 어디? 중앙대학교 서울캠퍼스 107관 602호에서!
+          <Text
+            fontSize="sm"
+            color="gray.600"
+            lineHeight="tall"
+            whiteSpace="pre-line"
+          >
+            {clubDetail.specDescription}
           </Text>
         </Box>
 
@@ -173,15 +173,13 @@ const ClubInfo = () => {
           <Heading as="h2" size="md" mb="2">
             모집 공고
           </Heading>
-          <Text fontSize="sm" color="gray.600" lineHeight="tall">
-            새로운 회원을 모집 중인 중앙대학교 극예술 연구회 타박네입니다.{' '}
-            <br />
-            기성연극에 얽매이지 않고 극단적인 실험과 도전을 통해 무대를
-            사랑하고! 인간을 표현하는! 가장 뛰어난 극단을 추구하는 우리는 극연
-            타박네입니다! <br />
-            무대는 타박네, 당신과 함께! 30년 이상의 전통을 자랑하는 우리를
-            만나보세요! <br />
-            활동은 어디? 중앙대학교 서울캠퍼스 107관 602호에서!
+          <Text
+            fontSize="sm"
+            color="gray.600"
+            lineHeight="tall"
+            whiteSpace="pre-line"
+          >
+            {clubDetail.recruitDescription}
           </Text>
         </Box>
       </VStack>

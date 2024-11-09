@@ -92,6 +92,20 @@ const CategoryPage = () => {
     return null;
   }
 
+  const handleClubClick = (clubId) => {
+    if (clubId) {
+      navigate(`/club/${clubId}`);
+    } else {
+      toast({
+        title: '접근할 수 없습니다.',
+        description: '해당 동아리의 정보를 불러올 수 없습니다.',
+        status: 'error',
+        duration: 3000,
+        isClosable: true,
+      });
+    }
+  };
+
   return (
     <Box bg="gray.50" minH="100vh">
       <Box bg={bgColor} p={4} position="sticky" top={0} zIndex={10}>
@@ -132,7 +146,7 @@ const CategoryPage = () => {
               key={club.id || Math.random()}
               width="100%"
               shadow="md"
-              onClick={() => navigate(`/club/${club.id}`)}
+              onClick={() => handleClubClick(club.id)}
               cursor="pointer"
               _hover={{ transform: 'translateY(-2px)', transition: '0.2s' }}
             >

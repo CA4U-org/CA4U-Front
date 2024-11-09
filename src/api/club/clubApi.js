@@ -22,3 +22,14 @@ export const getCategoryClubs = async (categoryId) => {
     throw error;
   }
 };
+
+// 클럽 상세 정보를 가져오는 API 추가 예시
+export const getClubDetail = async (clubId) => {
+  try {
+    const response = await axios.get(`/api/clubs/${clubId}`);
+    return response.data;
+  } catch (error) {
+    console.error('Error fetching club detail:', error);
+    throw error;
+  }
+};
