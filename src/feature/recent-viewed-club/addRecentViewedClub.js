@@ -8,7 +8,7 @@ export function addRecentViewedClub(clubId) {
 
   const recentViewedClubs = jsonRecentViewedClubs
     ? RecentQueue.fromJson(jsonRecentViewedClubs)
-    : new RecentQueue(5);
+    : new RecentQueue(3);
 
   recentViewedClubs.push(clubId);
 
