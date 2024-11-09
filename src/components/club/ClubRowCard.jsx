@@ -20,10 +20,10 @@ export function ClubRowCard({ club }) {
       />
       <Box p={2}>
         <Text fontWeight={'bolder'} fontSize={'md'}>
-          {club.name}
+          {club.clubNm}
         </Text>
         <Text color={'gray'} fontSize={'xs'}>
-          {club.description}
+          {club.briefDescription}
         </Text>
       </Box>
     </Flex>
