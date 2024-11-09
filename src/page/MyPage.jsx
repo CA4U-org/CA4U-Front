@@ -27,6 +27,10 @@ export function MyPage() {
     });
   }, []);
 
+  useEffect(() => {
+    console.log('user object:', user); // user 객체의 실제 구조 확인
+  }, [user]);
+
   return (
     <PageWrapper isLoading={isLoading} bgColor={'#f6f6f6'}>
       <TopHeader title={'내 정보'} />
@@ -71,7 +75,7 @@ function Profile({ user }) {
             {user.name}
           </Text>
           <Text fontSize={'sm'} ml={2} color={'gray'}>
-            {'19학번'}
+            {user.studentId}
           </Text>
         </Flex>
         <Box mt={1}>
@@ -106,34 +110,44 @@ function NoUserProfile() {
 }
 
 function MenuItemList() {
+  const navigate = useNavigate(); // useNavigate 훅 사용
   const cauColors = cauTheme.colors;
   const menuItemSize = '35px';
   const menuItems = [
     {
       icon: <IoIosHeart size={menuItemSize} color={cauColors.cauRed} />,
       title: ['즐겨찾기'],
+      onClick: () => navigate('/favorites'), // 즐겨찾기 페이지로 이동
     },
     {
       icon: <FaCircleCheck size={menuItemSize} color={'green'} />,
       title: ['소속 인증'],
+      onClick: () => {}, // 다른 메뉴 아이템의 onClick 핸들러
     },
     {
       icon: <MdMessage size={menuItemSize} color={cauColors.cauBlue} />,
       title: ['이용 건의하기'],
+      onClick: () => {}, // 다른 메뉴 아이템의 onClick 핸들러
     },
   ];
 
   return (
     <Flex justify={'space-between'} bg={'white'} m={3} wrap={'wrap'}>
       {menuItems.map((item, index) => (
-        <MenuItem key={index} icon={item.icon} title={item.title} />
+        <MenuItem
+          key={index}
+          icon={item.icon}
+          title={item.title}
+          onClick={item.onClick} // onClick prop 전달
+        />
       ))}
       <DummyMenuItem />
     </Flex>
   );
 }
 
-function MenuItem({ icon, title }) {
+function MenuItem({ icon, title, onClick }) {
+  // onClick prop 추가
   return (
     <Flex
       w="full"
@@ -142,9 +156,11 @@ function MenuItem({ icon, title }) {
       align={'center'}
       m={1}
       boxSize={'75px'}
+      onClick={onClick} // onClick 이벤트 추가
       _hover={{
         bg: 'gray.100',
         borderRadius: 'lg',
+        cursor: 'pointer', // 호버 시 커서 포인터로 변경
       }}
     >
       {icon}

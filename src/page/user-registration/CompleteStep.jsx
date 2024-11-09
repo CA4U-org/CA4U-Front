@@ -5,11 +5,11 @@ import { useNavigate } from 'react-router-dom';
 import { useEffect } from 'react';
 import { updateStudentInfo } from '../../api/members/updateStudentInfo';
 
-export function CompleteStep({ name, department, major }) {
+export function CompleteStep({ name, department, major, id }) {
   const navigate = useNavigate();
 
   useEffect(() => {
-    updateStudentInfo(name, department, major);
+    updateStudentInfo(name, department, major, id);
   }, []);
 
   return (

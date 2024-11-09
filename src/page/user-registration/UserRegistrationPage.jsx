@@ -3,6 +3,7 @@ import { RegistrationSteps } from './steps';
 import { DepartmentStep } from './DepartmentStep';
 import { MajorStep } from './MajorStep';
 import { NameStep } from './NameStep';
+import { StudentIdStep } from './StudentIdStep';
 import { CompleteStep } from './CompleteStep';
 
 export function UserRegistrationPage() {
@@ -19,8 +20,20 @@ export function UserRegistrationPage() {
       return (
         <NameStep
           onNext={(name) => {
-            funnel.history.push(RegistrationSteps.DEPARTMENT, { name });
+            funnel.history.push(RegistrationSteps.ID, { name }); // NAME -> ID
           }}
+        />
+      );
+    case RegistrationSteps.ID: // 대소문자 수정
+      return (
+        <StudentIdStep
+          {...funnel.context}
+          onNext={(id) =>
+            funnel.history.push(RegistrationSteps.DEPARTMENT, {
+              ...funnel.context,
+              id,
+            })
+          }
         />
       );
     case RegistrationSteps.DEPARTMENT:

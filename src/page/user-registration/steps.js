@@ -3,4 +3,5 @@ export const RegistrationSteps = {
   DEPARTMENT: 'department',
   MAJOR: 'major',
   COMPLETE: 'complete',
+  ID: 'id',
 };
