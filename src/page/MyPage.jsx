@@ -68,7 +68,7 @@ function Profile({ user }) {
       <Flex direction={'column'} px={4} flexGrow={1}>
         <Flex align={'center'}>
           <Text fontWeight={'bolder'} fontSize={'xl'}>
-            {user.email}
+            {user.name}
           </Text>
           <Text fontSize={'sm'} ml={2} color={'gray'}>
             {'19학번'}
@@ -76,10 +76,10 @@ function Profile({ user }) {
         </Flex>
         <Box mt={1}>
           <Text color={'gray'} fontSize={'sm'}>
-            {'경영경제대학'}
+            {user.department}
           </Text>
           <Text color={'gray'} fontSize={'sm'}>
-            {'경영학과'}
+            {user.major}
           </Text>
         </Box>
       </Flex>
