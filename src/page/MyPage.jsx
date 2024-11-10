@@ -201,7 +201,6 @@ function RelatedClubList() {
       setIsRecentViewedClubExists(true);
       getRelatedClubs(recentViewedClubs[recentViewedClubs.length - 1]).then(
         (res) => {
-          console.log(res.result);
           setRelatedClubs(res.result);
         }
       );
