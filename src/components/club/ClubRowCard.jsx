@@ -3,6 +3,8 @@ import { useNavigate } from 'react-router-dom';
 
 export function ClubRowCard({ club }) {
   const navigate = useNavigate();
+
+  console.log(club);
   return (
     <Flex
       borderRadius={'lg'}
@@ -14,7 +16,7 @@ export function ClubRowCard({ club }) {
       onClick={() => navigate(`/club/${club.id}`)}
     >
       <Image
-        src={club.imageUrl}
+        src={club.logoImgUrl}
         boxSize={'130px'}
         //image center, no repeat, cover
       />
