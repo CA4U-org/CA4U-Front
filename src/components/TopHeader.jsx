@@ -2,14 +2,20 @@ import React from 'react';
 import { IoArrowBack } from 'react-icons/io5';
 import { Box, Flex, Heading, Icon, Image } from '@chakra-ui/react';
 
-const TopHeader = ({ title, rightIcon, onRightIconClick }) => {
+const TopHeader = ({ title, rightIcon, onRightIconClick, onClickBefore }) => {
   return (
     <Flex justify={'space-between'} align={'center'} p={3}>
       {/* 뒤로가기 버튼과 로고를 묶어서 가로로 배치 */}
       <Icon
         as={IoArrowBack}
         boxSize={'24px'}
-        onClick={() => window.history.back()} // 기본 뒤로가기 동작
+        onClick={() => {
+          if (onClickBefore) {
+            onClickBefore();
+          } else {
+            window.history.back();
+          }
+        }} // 기본 뒤로가기 동작
       />
       {/* 가운데 타이틀 */}
       <Heading

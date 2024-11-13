@@ -28,11 +28,7 @@ export function MyPage() {
       setIsLoading(false);
     });
   }, []);
-
-  useEffect(() => {
-    console.log('user object:', user); // user 객체의 실제 구조 확인
-  }, [user]);
-
+  
   return (
     <PageWrapper isLoading={isLoading} bgColor={'#f6f6f6'}>
       <TopHeader title={'내 정보'} />

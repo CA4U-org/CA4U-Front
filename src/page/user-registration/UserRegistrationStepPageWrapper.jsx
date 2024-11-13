@@ -2,10 +2,15 @@ import { Box, Button, Show } from '@chakra-ui/react';
 import TopHeader from '../../components/TopHeader';
 import { PageWrapper } from '../PageWrapper';
 
-export function UserRegistrationStepPageWrapper({ children, onNext, title }) {
+export function UserRegistrationStepPageWrapper({
+  children,
+  onNext,
+  onBefore,
+  title,
+}) {
   return (
     <PageWrapper>
-      <TopHeader title={title} />
+      <TopHeader title={title} onClickBefore={onBefore} />
       <Box flexGrow={1} p={3}>
         {children}
       </Box>

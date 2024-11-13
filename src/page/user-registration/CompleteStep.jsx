@@ -2,10 +2,18 @@ import { PageWrapper } from '../PageWrapper';
 import { Button, Flex, Heading, Image } from '@chakra-ui/react';
 import PuangSarang from '../../assets/푸앙_사랑.png';
 import { useNavigate } from 'react-router-dom';
-import { useEffect } from 'react';
+import { useEffect, useState } from 'react';
 import { updateStudentInfo } from '../../api/members/updateStudentInfo';
+import Confetti from 'react-confetti';
 
 export function CompleteStep({ name, department, major, id }) {
+  const [confetting, setConfetting] = useState(true);
+
+  useEffect(() => {
+    setTimeout(() => {
+      setConfetting(false);
+    }, 5000);
+  }, []);
   const navigate = useNavigate();
 
   useEffect(() => {
@@ -37,6 +45,14 @@ export function CompleteStep({ name, department, major, id }) {
         >
           동아리 보러 가기
         </Button>
+        {confetting && (
+          <Confetti
+            width={window.innerWidth}
+            height={window.innerHeight}
+            numberOfPieces={1000}
+            recycle={false}
+          />
+        )}
       </Flex>
     </PageWrapper>
   );

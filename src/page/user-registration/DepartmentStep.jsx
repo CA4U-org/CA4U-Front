@@ -1,17 +1,29 @@
 import { useState } from 'react';
-import { Heading, Select } from '@chakra-ui/react';
+import { Heading, Input, Select } from '@chakra-ui/react';
 import { UserRegistrationStepPageWrapper } from './UserRegistrationStepPageWrapper';
 
-export function DepartmentStep({ name, onNext }) {
-  const [department, setDepartment] = useState('인문대학');
+export function DepartmentStep({
+  name,
+  id,
+  department: _department,
+  onNext,
+  onBefore,
+}) {
+  const [department, setDepartment] = useState(_department ?? '인문대학');
   return (
     <UserRegistrationStepPageWrapper
       title={'단과대 선택'}
       onNext={() => {
         onNext(department);
       }}
+      onBefore={onBefore}
     >
-      <Heading fontSize={'25px'}>{name}님, 안녕하세요! 😀</Heading>
+      <Heading size={'md'}>이름을 입력하세요</Heading>
+      <Input mt={2} value={name} disabled={true} />
+      <Heading size={'md'} mt={5}>
+        학번을 입력하세요
+      </Heading>
+      <Input mt={2} value={id} disabled={true} />
       <Heading size={'md'} mt={10}>
         단과대를 입력하세요
       </Heading>

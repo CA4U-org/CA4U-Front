@@ -5,8 +5,10 @@ import { MajorStep } from './MajorStep';
 import { NameStep } from './NameStep';
 import { StudentIdStep } from './StudentIdStep';
 import { CompleteStep } from './CompleteStep';
+import { useToast } from '@chakra-ui/react';
 
 export function UserRegistrationPage() {
+  const toast = useToast();
   const funnel = useFunnel({
     id: 'register',
     initial: {
@@ -19,8 +21,20 @@ export function UserRegistrationPage() {
     case RegistrationSteps.NAME:
       return (
         <NameStep
+          {...funnel.context}
           onNext={(name) => {
-            funnel.history.push(RegistrationSteps.ID, { name }); // NAME -> ID
+            funnel.history.push(RegistrationSteps.ID, {
+              ...funnel.context,
+              name,
+            }); // NAME -> ID
+          }}
+          onBefore={() => {
+            toast({
+              title: '정보를 입력해주세요 ㅠ ㅠ',
+              status: 'error',
+              duration: 3000,
+              isClosable: true,
+            });
           }}
         />
       );
@@ -34,6 +48,9 @@ export function UserRegistrationPage() {
               id,
             })
           }
+          onBefore={() => {
+            funnel.history.push(RegistrationSteps.NAME, { ...funnel.context });
+          }}
         />
       );
     case RegistrationSteps.DEPARTMENT:
@@ -46,6 +63,11 @@ export function UserRegistrationPage() {
               department,
             })
           }
+          onBefore={() => {
+            funnel.history.push(RegistrationSteps.ID, {
+              ...funnel.context,
+            });
+          }}
         />
       );
     case RegistrationSteps.MAJOR:
@@ -58,6 +80,11 @@ export function UserRegistrationPage() {
               major,
             })
           }
+          onBefore={() => {
+            funnel.history.push(RegistrationSteps.DEPARTMENT, {
+              ...funnel.context,
+            });
+          }}
         />
       );
     case RegistrationSteps.COMPLETE:

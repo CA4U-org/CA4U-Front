@@ -1,8 +1,8 @@
 import { useEffect, useState } from 'react';
-import { Heading, Select } from '@chakra-ui/react';
+import { Heading, Input, Select } from '@chakra-ui/react';
 import { UserRegistrationStepPageWrapper } from './UserRegistrationStepPageWrapper';
 
-export function MajorStep({ name, department, onNext }) {
+export function MajorStep({ name, id, department, onNext, onBefore }) {
   const [major, setMajor] = useState('');
 
   let majorList;
@@ -107,8 +107,18 @@ export function MajorStep({ name, department, onNext }) {
       onNext={() => {
         onNext(major);
       }}
+      onBefore={onBefore}
     >
-      <Heading fontSize={'25px'}>{name}님, 안녕하세요! 😀</Heading>
+      <Heading size={'md'}>이름을 입력하세요</Heading>
+      <Input mt={2} value={name} disabled={true} />
+      <Heading size={'md'} mt={5}>
+        학번을 입력하세요
+      </Heading>
+      <Input mt={2} value={id} disabled={true} />
+      <Heading size={'md'} mt={10}>
+        단과대를 입력하세요
+      </Heading>
+      <Input mt={2} value={department} disabled={true}></Input>
       <Heading size={'md'} mt={10}>
         전공을 입력하세요
       </Heading>
