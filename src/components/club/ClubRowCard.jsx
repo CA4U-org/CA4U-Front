@@ -3,8 +3,6 @@ import { useNavigate } from 'react-router-dom';
 
 export function ClubRowCard({ club }) {
   const navigate = useNavigate();
-
-  console.log(club);
   return (
     <Flex
       borderRadius={'lg'}

@@ -1,34 +1,29 @@
-import { Box, Button, Flex, Heading, Image, Text } from '@chakra-ui/react';
-import TopHeader from '../components/TopHeader';
-import StaffGuide from '../components/StaffGuide/StaffGuide';
+import { Button, Flex, Image, Text } from '@chakra-ui/react';
+import TopHeader from '../../components/TopHeader';
+import StaffGuide from '../../components/StaffGuide/StaffGuide';
 import { IoIosHeart } from 'react-icons/io';
-import { cauTheme } from '../shared/CAUTheme';
+import { cauTheme } from '../../shared/CAUTheme';
 import { FaCircleCheck } from 'react-icons/fa6';
 import { MdMessage } from 'react-icons/md';
 import { useEffect, useState } from 'react';
-import { PageWrapper } from './PageWrapper';
-import { ClubRowCard } from '../components/club/ClubRowCard';
-import { getMyClubs } from '../api/club/getMyClubs';
-import { useAuth } from '../shared/useAuth';
+import { PageWrapper } from '../PageWrapper';
+import { getMyClubs } from '../../api/club/getMyClubs';
+import { useAuth } from '../../shared/useAuth';
 import { useNavigate } from 'react-router-dom';
-import { ClubRowCardList } from '../components/club/ClubRowCardList';
-import { getRecentViewedClubs } from '../feature/recent-viewed-club/getRecentViewedClubs';
-import { logout } from '../api/members/logout';
-import { getRelatedClubs } from '../api/recommend/getRelatedClubs';
-import { clearRecentViewedClubs } from '../feature/recent-viewed-club/clearRecentViewedClubs';
+import { logout } from '../../api/members/logout';
+import { Profile } from './Profile';
+import { RelatedClubList } from './RelatedClubList';
 
 export function MyPage() {
   const { user } = useAuth();
   const [isLoading, setIsLoading] = useState(true);
-  const [myClubs, setMyClubs] = useState([]);
 
   useEffect(() => {
     getMyClubs().then((res) => {
-      setMyClubs(res);
       setIsLoading(false);
     });
   }, []);
-  
+
   return (
     <PageWrapper isLoading={isLoading} bgColor={'#f6f6f6'}>
       <TopHeader title={'내 정보'} />
@@ -36,7 +31,6 @@ export function MyPage() {
       <StaffGuide />
       <MenuItemList />
       <RelatedClubList />
-      {/*<MyClubList clubs={myClubs} />*/}
       {user && (
         <Flex m={3} justify={'center'}>
           <Text
@@ -56,36 +50,6 @@ export function MyPage() {
         </Flex>
       )}
     </PageWrapper>
-  );
-}
-
-function Profile({ user }) {
-  return (
-    <Flex w={'full'} p={5} justify={'center'} align={'center'}>
-      <Image
-        src={'https://i.imgur.com/d56CAWR.png'}
-        boxSize={'90px'}
-        borderRadius={'full'}
-      />
-      <Flex direction={'column'} px={4} flexGrow={1}>
-        <Flex align={'center'}>
-          <Text fontWeight={'bolder'} fontSize={'xl'}>
-            {user.name}
-          </Text>
-          <Text fontSize={'sm'} ml={2} color={'gray'}>
-            {user.studentId}
-          </Text>
-        </Flex>
-        <Box mt={1}>
-          <Text color={'gray'} fontSize={'sm'}>
-            {user.department}
-          </Text>
-          <Text color={'gray'} fontSize={'sm'}>
-            {user.major}
-          </Text>
-        </Box>
-      </Flex>
-    </Flex>
   );
 }
 
@@ -182,58 +146,5 @@ function DummyMenuItem() {
       boxSize={'75px'}
       borderRadius={'lg'}
     />
-  );
-}
-
-function RelatedClubList() {
-  const [isRecentViewedClubExists, setIsRecentViewedClubExists] =
-    useState(false);
-  const [relatedClubs, setRelatedClubs] = useState([]);
-
-  useEffect(() => {
-    const recentViewedClubs = getRecentViewedClubs();
-
-    if (recentViewedClubs.length > 0) {
-      setIsRecentViewedClubExists(true);
-      getRelatedClubs(recentViewedClubs[recentViewedClubs.length - 1]).then(
-        (res) => {
-          setRelatedClubs(res.result);
-        }
-      );
-
-      clearRecentViewedClubs();
-    }
-  }, []);
-
-  if (!isRecentViewedClubExists) {
-    return null;
-  }
-
-  return (
-    <Box bgColor={'white'} m={3}>
-      <Heading as="h4" size={'md'} pt={4} pl={4}>
-        AI 기반으로 추천해드려요
-      </Heading>
-      <ClubRowCardList>
-        {relatedClubs.map((club, index) => (
-          <ClubRowCard key={index} club={club} />
-        ))}
-      </ClubRowCardList>
-    </Box>
-  );
-}
-
-function MyClubList({ clubs }) {
-  return (
-    <Box bgColor={'white'} m={3} borderRadius={'md'}>
-      <Heading as="h4" size={'md'} pt={4} pl={4}>
-        my 소속 동아리
-      </Heading>
-      <ClubRowCardList>
-        {clubs.map((club, index) => (
-          <ClubRowCard key={index} club={club} />
-        ))}
-      </ClubRowCardList>
-    </Box>
   );
 }

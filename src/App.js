@@ -6,7 +6,7 @@ import PostDetailPage from './PostDetailPage';
 import ClubVerificationPage from './ClubVerificationPage';
 import { MobileFrameWrapper } from './MobileFrameWrapper';
 import './shared/css/hideScrollbar.css';
-import { MyPage } from './page/MyPage';
+import { MyPage } from './page/my/MyPage';
 import LoginForm from './LoginForm';
 import SignUpForm from './SignUpForm';
 import CategoryPage from './CategoryPage';
