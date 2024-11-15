@@ -3,12 +3,31 @@ import { ClubRowCardList } from '../../components/club/ClubRowCardList';
 import { ClubRowCard } from '../../components/club/ClubRowCard';
 import { useAuth } from '../../shared/useAuth';
 import { useNavigate } from 'react-router-dom';
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
+import { getFavorites } from '../../api/favorite/favorite';
+import { getRelatedClubs } from '../../api/recommend/getRelatedClubs';
 
 export function RelatedClubList() {
   const { user } = useAuth();
   const navigate = useNavigate();
   const [relatedClubs, setRelatedClubs] = useState([]);
+  const [isLoading, setIsLoading] = useState(true);
+
+  useEffect(() => {
+    if (user) {
+      getFavorites().then((resp) => {
+        if (resp.result.length === 0) {
+          setIsLoading(false);
+          return;
+        }
+        const clubIds = resp.result.map((item) => item.id);
+        getRelatedClubs(clubIds).then((clubs) => {
+          setRelatedClubs(clubs.result);
+          setIsLoading(false);
+        });
+      });
+    }
+  }, []);
 
   // 강한 블러 효과를 추가할 스타일 정의
   const blurOverlayStyle = {
@@ -99,6 +118,10 @@ export function RelatedClubList() {
         </Box>
       </Box>
     );
+  }
+
+  if (isLoading) {
+    return null;
   }
 
   return (
