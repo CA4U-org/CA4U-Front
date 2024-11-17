@@ -74,7 +74,7 @@ function NoUserProfile() {
 function MenuItemList() {
   const navigate = useNavigate(); // useNavigate 훅 사용
   const cauColors = cauTheme.colors;
-  const menuItemSize = '35px';
+  const menuItemSize = '30px';
   const menuItems = [
     {
       icon: <IoIosHeart size={menuItemSize} color={cauColors.cauRed} />,
@@ -127,7 +127,7 @@ function MenuItem({ icon, title, onClick }) {
     >
       {icon}
       {title.map((line, index) => (
-        <Text fontSize={'xs'} mt={index === 0 ? 1 : 0} key={index}>
+        <Text fontSize={'xs'} mt={2} key={index}>
           {line}
         </Text>
       ))}

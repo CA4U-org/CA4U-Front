@@ -60,7 +60,7 @@ export function FavoritesPage() {
   }
 
   return (
-    <Box minH="100vh" bg="gray.50">
+    <Box minH="100vh" bg="#f6f6f6">
       <TopHeader title={'즐겨찾기'} />
       <Container maxW="container.lg" py={8}>
         <VStack spacing={6} align="stretch">
