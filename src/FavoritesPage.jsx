@@ -1,22 +1,22 @@
-import React, { useState, useEffect } from 'react';
+import React, { useEffect, useState } from 'react';
 import {
+  Badge,
   Box,
-  Container,
-  Heading,
-  VStack,
-  Spinner,
-  Text,
-  SimpleGrid,
+  Button,
+  ButtonGroup,
   Card,
   CardBody,
-  Image,
-  Stack,
-  Divider,
   CardFooter,
-  ButtonGroup,
-  Button,
   Center,
-  Badge,
+  Container,
+  Divider,
+  Heading,
+  Image,
+  SimpleGrid,
+  Spinner,
+  Stack,
+  Text,
+  VStack,
 } from '@chakra-ui/react';
 import TopHeader from './components/TopHeader';
 import { getFavorites, toggleFavorites } from './api/favorite/favorite';
@@ -75,7 +75,7 @@ export function FavoritesPage() {
               </Text>
             </Center>
           ) : (
-            <SimpleGrid columns={{ base: 1, md: 2, lg: 3 }} spacing={6}>
+            <SimpleGrid columns={{ base: 1 }} spacing={6}>
               {favorites.map((club) => (
                 <Card key={club.id} maxW="sm" overflow="hidden">
                   <Image
