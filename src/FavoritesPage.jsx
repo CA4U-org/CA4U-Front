@@ -75,7 +75,11 @@ export function FavoritesPage() {
               </Text>
             </Center>
           ) : (
+<<<<<<< Updated upstream
             <SimpleGrid columns={{ base: 1 }} spacing={6}>
+=======
+            <SimpleGrid columns={{ base: 1, md: 1, lg: 1 }} spacing={6}>
+>>>>>>> Stashed changes
               {favorites.map((club) => (
                 <Card key={club.id} maxW="sm" overflow="hidden">
                   <Image

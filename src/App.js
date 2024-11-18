@@ -22,6 +22,8 @@ function App() {
     <MobileFrameWrapper>
       <Router>
         <Routes>
+          {/*검색 결과 페이지 */}
+
           {/* 인증 관련 라우트 */}
           <Route path="/login" element={<LoginForm />} />
           <Route path="/signup" element={<SignUpForm />} />
