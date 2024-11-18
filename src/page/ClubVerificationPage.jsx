@@ -1,7 +1,7 @@
 import React from 'react';
-import TopHeader from './components/TopHeader'; // 상단 헤더 컴포넌트
-import StaffGuide from './components/StaffGuide/StaffGuide'; // 스탭 안내 컴포넌트
-import searchIcon from './assets/search-icon.png'; // 검색 아이콘
+import TopHeader from '../components/Header/Header'; // 상단 헤더 컴포넌트
+import StaffGuide from '../components/StaffGuide/StaffGuide'; // 스탭 안내 컴포넌트
+import searchIcon from '../assets/search-icon.png'; // 검색 아이콘
 import ScreenshotUpload from './ScreenShotUpload';
 
 const ClubVerificationPage = () => {

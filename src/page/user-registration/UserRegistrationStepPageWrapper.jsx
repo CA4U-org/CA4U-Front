@@ -1,5 +1,5 @@
 import { Box, Button, Show } from '@chakra-ui/react';
-import TopHeader from '../../components/TopHeader';
+import TopHeader from '../../components/Header/Header';
 import { PageWrapper } from '../PageWrapper';
 
 export function UserRegistrationStepPageWrapper({

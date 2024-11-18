@@ -1,5 +1,5 @@
 import { Button, Flex, Image, Text } from '@chakra-ui/react';
-import TopHeader from '../../components/TopHeader';
+import TopHeader from '../../components/Header/Header';
 import StaffGuide from '../../components/StaffGuide/StaffGuide';
 import { IoIosHeart } from 'react-icons/io';
 import { cauTheme } from '../../shared/CAUTheme';

@@ -8,9 +8,9 @@ import {
   InputLeftElement,
   Text,
 } from '@chakra-ui/react';
-import ca4uSVG from './assets/ca4u.svg';
-import myIcon from './assets/my-icon.svg';
-import searchIcon from './assets/search-icon.svg';
+import ca4uSVG from '../../assets/ca4u.svg';
+import myIcon from '../../assets/my-icon.svg';
+import searchIcon from '../../assets/search-icon.svg';
 import { useNavigate } from 'react-router-dom';
 
 const Header = () => {

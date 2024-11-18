@@ -11,19 +11,15 @@ import {
 import { useNavigate, useParams } from 'react-router-dom';
 import { ChevronLeftIcon } from '@chakra-ui/icons';
 import { IoIosHeart, IoIosHeartEmpty } from 'react-icons/io';
-import ClubImageSlider from './components/ClubImageSlider';
-import ClubInfo from './components/ClubInfo';
-import { addRecentViewedClub } from './feature/recent-viewed-club/addRecentViewedClub';
-import { getClubDetail } from './api/club/clubApi';
-import {
-  addFavorite,
-  toggleFavorites,
-  getFavorites,
-} from './api/favorite/favorite';
+import ClubImageSlider from '../components/ClubImageSlider';
+import ClubInfo from '../components/ClubInfo';
+import { addRecentViewedClub } from '../feature/recent-viewed-club/addRecentViewedClub';
+import { getClubDetail } from '../api/club/clubApi';
+import { toggleFavorites, getFavorites } from '../api/favorite/favorite';
 
 // 이미지 관련 모크데이터
 const clubImages = [
-  'https://s3-alpha-sig.figma.com/img/b27c/4fdf/1fb1d8ab73cfac58d71268a454dfb893?Expires=1728864000&Key-Pair-Id=APKAQ4GOSFWCVNEHN3O4&Signature=qf9gbewLVYeOZfe8N1XBVRx1adlc~TdHlOnxYUl5D1wPE8DScvmVjJHccR4RZJ08Y~gut1Dd2~lpw55uIFpH3t60F6zFSJ2lFMcmVJ~gQO32Ggh66M--ho5KTZloxRsdOwUbSVKFqUkPb4YE5cPRXA~2V-1xi1~bnn2UJYk3dk8-9~5aQhwNqrbgavEAe4LpI44kHdWHevcXHjFskC9wfkxkfPxGc2Vu8sfP4FCgHcN8dbkqVIJf5yrxfx7Zwq2mlfpMsft2iTXNG-J-jtAWiyMQdQzFnJReAT4TChHhII4rJVCjUcqosbcCF6g8Q0usJNETMRd3Ud3s0fGtN7C3eA__',
+  'https://via.placeholder.com/800x400?text=Club+Image+1',
   'https://via.placeholder.com/800x400?text=Club+Image+2',
   'https://via.placeholder.com/800x400?text=Club+Image+3',
   'https://via.placeholder.com/800x400?text=Club+Image+4',

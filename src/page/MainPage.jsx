@@ -1,13 +1,14 @@
 import React from 'react';
-import Header from './Header';
-import './App.css';
-import StaffGuide from './components/StaffGuide/StaffGuide';
-import CategoryView from './components/CategoryView/CategoryView';
+import Header from '../components/Header/MainHeader';
+import '../App.css';
+import StaffGuide from '../components/StaffGuide/StaffGuide';
+import CategoryView from '../components/CategoryView/CategoryView';
 import { Box, Grid, Text } from '@chakra-ui/react';
-import AffiliationViewButton from './components/AffiliationViewButton';
-import linkIcon from './assets/link_icon.svg';
-import cauIcon from './assets/CAU-logo.svg';
-import puangIcon from './assets/푸앙-icon.svg';
+import AffiliationViewButton from '../components/AffiliationViewButton';
+import linkIcon from '../assets/link_icon.svg';
+import cauIcon from '../assets/CAU-logo.svg';
+import puangIcon from '../assets/푸앙-icon.svg';
+import AIRecommendation from '../components/AIRecommendation/AIRecommendation';
 
 export default function MainPage() {
   return (
@@ -44,6 +45,7 @@ export default function MainPage() {
         카테고리별로 보기
       </Text>
       <CategoryView />
+      <AIRecommendation />
     </Box>
   );
 }

@@ -143,10 +143,6 @@ const ClubInfo = ({ clubDetail }) => {
               Last updated: {clubDetail.updatedAt}
             </Text>
           </Box>
-          <HStack spacing="4">
-            <FavoriteButton />
-            <VerifiedButton />
-          </HStack>
         </Flex>
 
         <ClubTags />

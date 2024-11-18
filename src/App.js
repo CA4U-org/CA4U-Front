@@ -1,21 +1,18 @@
 import React from 'react';
 import { BrowserRouter as Router, Route, Routes } from 'react-router-dom';
-import MainPage from './MainPage';
-import ClubDetailPage from './ClubDetailPage';
-import PostDetailPage from './PostDetailPage';
-import ClubVerificationPage from './ClubVerificationPage';
+import MainPage from './page/MainPage';
+import ClubDetailPage from './page/ClubDetailPage';
+import PostDetailPage from './page/PostDetailPage';
+import ClubVerificationPage from './page/ClubVerificationPage';
 import { MobileFrameWrapper } from './MobileFrameWrapper';
 import './shared/css/hideScrollbar.css';
 import { MyPage } from './page/my/MyPage';
-import LoginForm from './LoginForm';
-import SignUpForm from './SignUpForm';
-import CategoryPage from './CategoryPage';
-import SearchPage from './SearchPage';
+import CategoryPage from './page/CategoryPage';
 import 'slick-carousel/slick/slick.css';
 import 'slick-carousel/slick/slick-theme.css';
 import OAuth2RedirectHandler from './components/OAuth2RedirectHandler';
 import { UserRegistrationPage } from './page/user-registration/UserRegistrationPage';
-import { FavoritesPage } from './FavoritesPage';
+import { FavoritesPage } from './page/FavoritesPage';
 
 function App() {
   return (
@@ -23,14 +20,9 @@ function App() {
       <Router>
         <Routes>
           {/*검색 결과 페이지 */}
-
-          {/* 인증 관련 라우트 */}
-          <Route path="/login" element={<LoginForm />} />
-          <Route path="/signup" element={<SignUpForm />} />
           {/* 메인 페이지 */}
           <Route path="/" element={<MainPage />} />
           {/* App.jsx에 추가할 라우트*/}
-          <Route path="/search" element={<SearchPage />} />
           {/* 동아리 상세 페이지 */}
           <Route path="/club/:clubId" element={<ClubDetailPage />} />
           {/* 게시글 상세 페이지 */}

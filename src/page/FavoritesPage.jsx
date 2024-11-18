@@ -18,8 +18,8 @@ import {
   Text,
   VStack,
 } from '@chakra-ui/react';
-import TopHeader from './components/TopHeader';
-import { getFavorites, toggleFavorites } from './api/favorite/favorite';
+import TopHeader from '../components/Header/Header';
+import { getFavorites, toggleFavorites } from '../api/favorite/favorite';
 import { useNavigate } from 'react-router-dom';
 
 export function FavoritesPage() {
@@ -75,11 +75,7 @@ export function FavoritesPage() {
               </Text>
             </Center>
           ) : (
-<<<<<<< Updated upstream
-            <SimpleGrid columns={{ base: 1 }} spacing={6}>
-=======
             <SimpleGrid columns={{ base: 1, md: 1, lg: 1 }} spacing={6}>
->>>>>>> Stashed changes
               {favorites.map((club) => (
                 <Card key={club.id} maxW="sm" overflow="hidden">
                   <Image
