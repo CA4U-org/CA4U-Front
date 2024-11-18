@@ -32,21 +32,28 @@ export function MyPage() {
       <MenuItemList />
       <RelatedClubList />
       {user && (
-        <Flex m={3} justify={'center'}>
-          <Text
-            color={'gray.500'}
+        <Flex m={0} justify={'center'}>
+          <Button
+            bg="white"
+            fontWeight="bold"
+            color="gray.500"
             onClick={() => {
               logout().then(() => {
                 window.location.reload();
               });
             }}
             _hover={{
-              cursor: 'pointer',
               color: 'gray.700',
+              bg: 'gray.100',
             }}
+            size="sm"
+            px={3}
+            py={1}
+            borderRadius="md"
+            height="auto"
           >
             로그아웃
-          </Text>
+          </Button>
         </Flex>
       )}
     </PageWrapper>

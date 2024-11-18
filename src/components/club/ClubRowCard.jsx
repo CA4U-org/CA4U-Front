@@ -13,16 +13,12 @@ export function ClubRowCard({ club }) {
       w={'130px'}
       onClick={() => navigate(`/club/${club.id}`)}
     >
-      <Image
-        src={club.logoImgUrl}
-        boxSize={'130px'}
-        //image center, no repeat, cover
-      />
+      <Image src={club.logoImgUrl} boxSize={'130px'} />
       <Box p={2}>
         <Text fontWeight={'bolder'} fontSize={'md'}>
           {club.clubNm}
         </Text>
-        <Text color={'gray'} fontSize={'xs'}>
+        <Text color={'gray'} fontSize={'xs'} noOfLines={2}>
           {club.briefDescription}
         </Text>
       </Box>

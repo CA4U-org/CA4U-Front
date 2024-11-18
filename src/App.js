@@ -13,6 +13,7 @@ import 'slick-carousel/slick/slick-theme.css';
 import OAuth2RedirectHandler from './components/OAuth2RedirectHandler';
 import { UserRegistrationPage } from './page/user-registration/UserRegistrationPage';
 import { FavoritesPage } from './page/FavoritesPage';
+import SocialLogin from './LoginForm';
 
 function App() {
   return (
@@ -23,6 +24,7 @@ function App() {
           {/* 메인 페이지 */}
           <Route path="/" element={<MainPage />} />
           {/* App.jsx에 추가할 라우트*/}
+          <Route path="/login" element={<SocialLogin />} />
           {/* 동아리 상세 페이지 */}
           <Route path="/club/:clubId" element={<ClubDetailPage />} />
           {/* 게시글 상세 페이지 */}

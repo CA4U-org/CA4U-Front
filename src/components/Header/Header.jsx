@@ -30,7 +30,7 @@ const Header = ({ title = '카테고리별로 보기', color = 'white' }) => {
         position="relative"
       >
         {/* 왼쪽 그룹 (뒤로가기 + 로고) */}
-        <HStack spacing={3}>
+        <HStack spacing={0}>
           <IconButton
             icon={<ChevronLeftIcon boxSize={6} />}
             variant="ghost"
@@ -40,8 +40,7 @@ const Header = ({ title = '카테고리별로 보기', color = 'white' }) => {
           <Image
             src={ca4uHeaderIcon}
             alt="CA4U Logo"
-            width="32px"
-            height="32px"
+            boxSize="32px" // 높이와 너비를 동시에 설정
           />
         </HStack>
 
