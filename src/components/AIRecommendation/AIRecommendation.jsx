@@ -11,7 +11,6 @@ const AIRecommendation = () => {
   useEffect(() => {
     if (user) {
       getUserRecommendedClubs(user.id).then((res) => {
-        console.log(res.result);
         setClubs(res.result);
       });
     }
