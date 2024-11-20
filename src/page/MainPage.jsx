@@ -3,16 +3,17 @@ import Header from '../components/Header/MainHeader';
 import '../App.css';
 import StaffGuide from '../components/StaffGuide/StaffGuide';
 import CategoryView from '../components/CategoryView/CategoryView';
-import { Box, Grid, Text } from '@chakra-ui/react';
+import { Grid, Text } from '@chakra-ui/react';
 import AffiliationViewButton from '../components/AffiliationViewButton';
 import linkIcon from '../assets/link_icon.svg';
 import cauIcon from '../assets/CAU-logo.svg';
 import puangIcon from '../assets/푸앙-icon.svg';
 import AIRecommendation from '../components/AIRecommendation/AIRecommendation';
+import { PageWrapper } from './PageWrapper';
 
 export default function MainPage() {
   return (
-    <Box>
+    <PageWrapper>
       <Header />
       <Text mt={6} ml={4} fontSize="xl" fontWeight="bold">
         소속별로 보기
@@ -46,6 +47,6 @@ export default function MainPage() {
       </Text>
       <CategoryView />
       <AIRecommendation />
-    </Box>
+    </PageWrapper>
   );
 }
