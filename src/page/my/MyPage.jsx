@@ -96,7 +96,9 @@ function MenuItemList() {
     {
       icon: <MdMessage size={menuItemSize} color={cauColors.cauBlue} />,
       title: ['이용 건의하기'],
-      onClick: () => {}, // 다른 메뉴 아이템의 onClick 핸들러
+      onClick: () => {
+        window.location.href = 'mailto:ca4u.dev@gmail.com';
+      }, // 다른 메뉴 아이템의 onClick 핸들러
     },
   ];
 
