@@ -19,9 +19,10 @@ export const AuthProvider = ({ children }) => {
         ) {
           window.location.href = '/register';
         }
-      } else if (res.message === '로그인이 필요합니다.') {
+      } else {
         setUser(null);
       }
+
       setIsLoading(false);
     });
   }, []);
