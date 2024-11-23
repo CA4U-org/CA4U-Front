@@ -1,10 +1,21 @@
-import React from 'react';
+import React, { useEffect, useState } from 'react';
 import Slider from 'react-slick';
-import { Box, Text, Image, VStack, HStack } from '@chakra-ui/react';
-import mainImage from '../../assets/main-image.png';
-import clubLogo from '../../assets/club-logo.png';
+import { Box, HStack, Image, Text, VStack } from '@chakra-ui/react';
+import { getUserRecommendedClubs } from '../../api/recommend/getUserRecommendedClubs';
+import { useAuth } from '../../shared/useAuth';
 
 const AIRecommendation = () => {
+  const { user } = useAuth();
+  const [clubs, setClubs] = useState([]);
+
+  useEffect(() => {
+    if (user) {
+      getUserRecommendedClubs(user.id).then((res) => {
+        setClubs(res.result);
+      });
+    }
+  }, []);
+
   const settings = {
     dots: true,
     infinite: true,
@@ -25,48 +36,12 @@ const AIRecommendation = () => {
     ],
   };
 
-  const clubs = [
-    {
-      name: '타박네',
-      subtitle: '중앙대학교 한국예술 연구회 since 1989',
-      description:
-        '삶의 연극, 사람의 연극! 중앙대학교 국예술연구회 타박네입니다. 거창하게 국예술연구회라고 하지만! 이라는 것을 매...',
-      image: mainImage,
-      logo: clubLogo,
-    },
-    {
-      name: '두 번째 동아리',
-      subtitle: '두 번째 동아리의 소제목이 여기에 들어갑니다.',
-      description:
-        '두 번째 동아리의 설명 텍스트가 여기에 들어갑니다. 동아리에 대해 간단히 소개합니다.',
-      image: mainImage,
-      logo: clubLogo,
-    },
-    {
-      name: '세 번째 동아리',
-      subtitle: '세 번째 동아리의 소제목이 여기에 들어갑니다.',
-      description:
-        '세 번째 동아리의 설명 텍스트가 여기에 들어갑니다. 동아리에 대해 간단히 소개합니다.',
-      image: mainImage,
-      logo: clubLogo,
-    },
-    {
-      name: '네 번째 동아리',
-      subtitle: '네 번째 동아리의 소제목이 여기에 들어갑니다.',
-      description:
-        '네 번째 동아리의 설명 텍스트가 여기에 들어갑니다. 동아리에 대해 간단히 소개합니다.',
-      image: mainImage,
-      logo: clubLogo,
-    },
-    {
-      name: '다섯 번째 동아리',
-      subtitle: '다섯 번째 동아리의 소제목이 여기에 들어갑니다.',
-      description:
-        '다섯 번째 동아리의 설명 텍스트가 여기에 들어갑니다. 동아리에 대해 간단히 소개합니다.',
-      image: mainImage,
-      logo: clubLogo,
-    },
-  ];
+  /**
+   * 데이터 없는 경우 일단 렌더링 하지 않음
+   */
+  if (clubs.length === 0) {
+    return null;
+  }
 
   return (
     <Box>
@@ -126,8 +101,8 @@ const AIRecommendation = () => {
             <Box key={index} p={4}>
               <Box borderRadius="lg" overflow="hidden" boxShadow="md">
                 <Image
-                  src={club.image}
-                  alt={`${club.name} 활동 이미지`}
+                  src={club.logoImgUrl}
+                  alt={`${club.clubNm} 활동 이미지`}
                   width="100%"
                   height="200px"
                   objectFit="cover"
@@ -135,15 +110,15 @@ const AIRecommendation = () => {
                 <VStack align="stretch" p={4} spacing={3}>
                   <HStack>
                     <Image
-                      src={club.logo}
-                      alt={`${club.name} 로고`}
+                      src={club.logoImgUrl}
+                      alt={`${club.clubNm} 로고`}
                       width="24px"
                       height="24px"
                     />
-                    <Text fontWeight="bold">{club.name}</Text>
+                    <Text fontWeight="bold">{club.clubNm}</Text>
                   </HStack>
                   <Text fontSize="sm" color="gray.600">
-                    {club.subtitle}
+                    {club.briefDescription}
                   </Text>
                   <Text fontSize="sm">{club.description}</Text>
                 </VStack>

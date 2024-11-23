@@ -67,12 +67,12 @@ export function RelatedClubList() {
       <Box position="relative" m={3} bgColor={'white'}>
         <Heading
           as={'h4'}
-          size={'sm'}
+          fontSize={'19px'}
           pt={4}
           pl={4}
           zIndex={2}
           position="relative"
-          mb={1}
+          mb={3}
         >
           로그인하고 추천 동아리를 확인하세요!
         </Heading>

@@ -14,43 +14,47 @@ const SocialLogin = () => {
       alignItems="center"
       minHeight="100vh"
       bg="gray.50"
-      p={4}
+      p={6}
     >
-      <Heading fontSize="3xl" color="blue.600" mb={4}>
-        CA
-        <Text as="span" color="red.500">
-          4
-        </Text>
-        U
-      </Heading>
-
       <VStack
         spacing={6}
-        w="full"
-        maxW="300px"
+        display={'flex'}
+        align={'center'}
         boxShadow="lg"
         p={6}
         bg="white"
         borderRadius="lg"
+        w={'full'}
       >
+        <Heading fontSize="4xl" color="blue.600">
+          CA
+          <Text as="span" color="red.500">
+            4
+          </Text>
+          U
+        </Heading>
+        <Text textAlign={'center'} fontSize={'xl'} fontWeight={600}>
+          CA4U와 함께 <br /> 행복한 대학생활을 시작하세요!
+        </Text>
         <Button
-          width="full"
+          w={'full'}
           variant="outline"
           size="lg"
           onClick={() =>
             (window.location.href = `${SERVER_URL}/oauth2/authorization/google`)
           }
-          py={6}
           display="flex"
           alignItems="center"
           justifyContent="center"
           gap={3}
-          _hover={{ bg: 'gray.100' }}
+          h={'50px'}
         >
           <Image src={googleLogo} alt="Google Logo" boxSize="24px" />
           Google 계정으로 로그인
         </Button>
-        <Button onClick={() => navigate('/')}>뒤로가기</Button>
+        <Button w={'full'} h={'50px'} onClick={() => navigate(-1)}>
+          뒤로가기
+        </Button>
       </VStack>
       <Text mt={8} color="gray.500" fontSize="sm">
         © 2024 Your Company. All rights reserved.
