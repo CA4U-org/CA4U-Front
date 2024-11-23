@@ -6,12 +6,9 @@ import {
   Text,
   Card,
   CardBody,
-  Tag,
   Image,
   Spinner,
   useToast,
-  Wrap,
-  WrapItem,
 } from '@chakra-ui/react';
 import { useParams, useNavigate } from 'react-router-dom';
 import { getCategoryClubs } from '../api/club/clubApi';
@@ -75,7 +72,6 @@ const CATEGORIES = {
     emoji: '🤝',
   },
 };
-
 const CategoryPage = () => {
   const { category } = useParams();
   const navigate = useNavigate();
@@ -88,11 +84,9 @@ const CategoryPage = () => {
       try {
         setLoading(true);
         const categoryId = CATEGORIES[category]?.id;
-
         if (!categoryId) {
           throw new Error('유효하지 않은 카테고리입니다.');
         }
-
         const response = await getCategoryClubs(categoryId);
         if (response.success && Array.isArray(response.result)) {
           setClubs(response.result);
@@ -137,29 +131,34 @@ const CategoryPage = () => {
 
   return (
     <Box bg="gray.50" minH="100vh">
-      <Header
-        title={CATEGORIES[category]?.name}
-        color={CATEGORIES[category]?.color}
-      />
+      <Box position="sticky" top="0" zIndex="999" bg="white">
+        <Header title="카테고리별로 보기" />
 
-      {/* 카테고리 설명 섹션 수정 */}
-      <Box bg="gray.10" py={8} mb={6} shadow="sm">
-        <HStack maxW="container.lg" mx="auto" px={4} spacing={8} align="center">
-          <Image
-            src={CATEGORIES[category]?.icon}
-            alt={CATEGORIES[category]?.name}
-            boxSize="14"
-            objectFit="contain"
-          />
-          <VStack align="flex-start" spacing={2}>
-            <Text fontSize="2xl" fontWeight="extrabold" color="#454545">
-              {CATEGORIES[category]?.name}
-            </Text>
-            <Text fontSize="sm" fontWeight="bold" color="#959595">
-              {CATEGORIES[category]?.description}
-            </Text>
-          </VStack>
-        </HStack>
+        {/* 카테고리 설명 섹션 */}
+        <Box bg={CATEGORIES[category]?.color} py={8} shadow="sm">
+          <HStack
+            maxW="container.lg"
+            mx="auto"
+            px={4}
+            spacing={8}
+            align="center"
+          >
+            <Image
+              src={CATEGORIES[category]?.icon}
+              alt={CATEGORIES[category]?.name}
+              boxSize="14"
+              objectFit="contain"
+            />
+            <VStack align="flex-start" spacing={2}>
+              <Text fontSize="2xl" fontWeight="extrabold" color="#454545">
+                {CATEGORIES[category]?.name}
+              </Text>
+              <Text fontSize="sm" fontWeight="bold" color="#959595">
+                {CATEGORIES[category]?.description}
+              </Text>
+            </VStack>
+          </HStack>
+        </Box>
       </Box>
 
       <VStack spacing={4} p={4} maxW="container.lg" mx="auto">
@@ -192,13 +191,10 @@ const CategoryPage = () => {
                     <Text fontWeight="bold" fontSize="xl" color="gray.800">
                       {club.clubNm}
                     </Text>
-
                     <Text fontSize="sm" fontWeight="bold" color="#959595">
-                      {club.briefDescription ||
-                        '중앙대학교 중앙동아리 극예술연구회'}
+                      {club.briefDescription || '중앙대학교 중앙동아리'}
                     </Text>
                   </VStack>
-
                   <Image
                     src={club.logoImgUrl || '/default-club-logo.png'}
                     alt={club.clubNm}
