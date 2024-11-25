@@ -70,8 +70,7 @@ const ClubDetailPage = () => {
 
       toast({
         title: '오류가 발생했습니다.',
-        description:
-          error.response?.data?.message || '잠시 후 다시 시도해주세요.',
+        description: '로그인 후  다시 시도해주세요.',
         status: 'error',
         duration: 3000,
         isClosable: true,
