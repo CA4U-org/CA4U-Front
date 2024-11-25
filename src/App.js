@@ -14,6 +14,7 @@ import OAuth2RedirectHandler from './components/OAuth2RedirectHandler';
 import { UserRegistrationPage } from './page/user-registration/UserRegistrationPage';
 import { FavoritesPage } from './page/FavoritesPage';
 import SocialLogin from './LoginForm';
+import SearchPage from './page/SearchPage';
 
 function App() {
   return (
@@ -21,6 +22,7 @@ function App() {
       <Router>
         <Routes>
           {/*검색 결과 페이지 */}
+          <Route path="/search" element={<SearchPage />} /> {/* 추가 */}
           {/* 메인 페이지 */}
           <Route path="/" element={<MainPage />} />
           {/* App.jsx에 추가할 라우트*/}

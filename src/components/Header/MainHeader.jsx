@@ -16,11 +16,16 @@ import { useNavigate } from 'react-router-dom';
 const Header = () => {
   const navigate = useNavigate();
 
-  // 검색 이벤트 핸들러 추가
+  // 검색 이벤트 핸들러 수정
   const handleSearch = (e) => {
     if (e.key === 'Enter' && e.target.value.trim()) {
-      // 빈 검색어가 아닐 때만 검색
-      navigate(`/search?query=${encodeURIComponent(e.target.value.trim())}`);
+      // 검색어와 함께 state로 필터 상태도 전달할 수 있습니다
+      navigate('/search', {
+        state: {
+          query: e.target.value.trim(),
+          filters: {}, // 필요한 경우 초기 필터 상태 전달
+        },
+      });
     }
   };
 
