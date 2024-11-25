@@ -17,7 +17,7 @@ const Header = ({ title = '카테고리별로 보기', color = 'white' }) => {
       position="sticky"
       top="0"
       zIndex="999"
-      width="100%"
+      width="100%"ㅈ
       maxWidth="inherit"
       backgroundColor={color}
     >
