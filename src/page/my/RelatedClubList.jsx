@@ -6,6 +6,7 @@ import { useNavigate } from 'react-router-dom';
 import { useEffect, useState } from 'react';
 import { getFavorites } from '../../api/favorite/favorite';
 import { getRelatedClubs } from '../../api/recommend/getRelatedClubs';
+import openColor from 'open-color';
 
 export function RelatedClubList() {
   const { user } = useAuth();
@@ -64,76 +65,71 @@ export function RelatedClubList() {
 
   if (!user) {
     return (
-      <Box position="relative" m={3} bgColor={'white'}>
-        <Heading
-          as={'h4'}
-          fontSize={'19px'}
-          pt={4}
-          pl={4}
-          zIndex={2}
-          position="relative"
-          mb={3}
-        >
+      <>
+        <Heading as={'h4'} fontSize={'16px'} pl={4}>
           로그인하고 추천 동아리를 확인하세요!
         </Heading>
-        <Flex
-          position="absolute"
-          w={'full'}
-          top={'50%'}
-          zIndex={2}
-          align={'center'}
-          justify={'center'}
-        >
-          <Button
-            colorScheme={'blue'}
-            w={'2xs'}
-            onClick={() => {
-              navigate('/login');
-            }}
+        <Box position="relative" mx={3} my={1} bgColor={'white'}>
+          <Flex
+            position="absolute"
+            w={'full'}
+            top={'50%'}
+            zIndex={2}
+            align={'center'}
+            justify={'center'}
           >
-            로그인
-          </Button>
-        </Flex>
+            <Button
+              colorScheme={'blue'}
+              w={'2xs'}
+              onClick={() => navigate('/login')}
+            >
+              로그인
+            </Button>
+          </Flex>
 
-        <Box position="relative">
-          <Box style={blurOverlayStyle} onClick={(e) => e.stopPropagation()} />
-          <ClubRowCardList>
-            <ClubRowCard
-              key={0}
-              club={{
-                id: 1,
-                clubNm: '피카통',
-                logoImgUrl:
-                  'https://cdn.imweb.me/thumbnail/20240219/d87859d9aaf92.png',
-                briefDescription: '중앙대학교 중앙동아리 피카통',
-              }}
-              descriptionStyle={descriptionStyle}
+          <Box position="relative">
+            <Box
+              style={blurOverlayStyle}
+              onClick={(e) => e.stopPropagation()}
             />
-            <ClubRowCard
-              key={1}
-              club={{
-                id: 2,
-                clubNm: 'CUAI',
-                logoImgUrl:
-                  'https://blogpfthumb-phinf.pstatic.net/MjAyMDA3MDJfOTAg/MDAxNTkzNjc4NzYxODA0.KvxnAaaWqGV0hXhPpGt1USCsmDxrA14nbBWRNM2BKX4g.3pmkEkqxJJN-Z-rJzrTPYjJcKvg1Gt3b_d6tjMIhFnYg.PNG.cuaibigdata/cuai.png?type=w3840',
-                briefDescription: '중앙대학교 인공지능학회',
-              }}
-              descriptionStyle={descriptionStyle}
-            />
-            <ClubRowCard
-              key={2}
-              club={{
-                id: 0,
-                clubNm: 'CUSCM',
-                logoImgUrl:
-                  'https://cdn.imweb.me/thumbnail/20220212/4b44401c03350.png',
-                briefDescription: '중앙대학교 중앙동아리 개신교예배 동아리',
-              }}
-              descriptionStyle={descriptionStyle}
-            />
-          </ClubRowCardList>
+            <ClubRowCardList>
+              <ClubRowCard
+                key={0}
+                club={{
+                  id: 1,
+                  clubNm: '피카통',
+                  logoImgUrl:
+                    'https://cdn.imweb.me/thumbnail/20240219/d87859d9aaf92.png',
+                  briefDescription: '중앙대학교 중앙동아리 피카통',
+                }}
+                descriptionStyle={descriptionStyle}
+              />
+              <ClubRowCard
+                key={1}
+                club={{
+                  id: 2,
+                  clubNm: 'CUAI',
+                  logoImgUrl:
+                    'https://blogpfthumb-phinf.pstatic.net/MjAyMDA3MDJfOTAg/MDAxNTkzNjc4NzYxODA0.KvxnAaaWqGV0hXhPpGt1USCsmDxrA14nbBWRNM2BKX4g.3pmkEkqxJJN-Z-rJzrTPYjJcKvg1Gt3b_d6tjMIhFnYg.PNG.cuaibigdata/cuai.png?type=w3840',
+                  briefDescription: '중앙대학교 인공지능학회',
+                }}
+                descriptionStyle={descriptionStyle}
+              />
+              <ClubRowCard
+                key={2}
+                club={{
+                  id: 0,
+                  clubNm: 'CUSCM',
+                  logoImgUrl:
+                    'https://cdn.imweb.me/thumbnail/20220212/4b44401c03350.png',
+                  briefDescription: '중앙대학교 중앙동아리 개신교예배 동아리',
+                }}
+                descriptionStyle={descriptionStyle}
+              />
+            </ClubRowCardList>
+          </Box>
         </Box>
-      </Box>
+      </>
     );
   }
 
@@ -142,29 +138,31 @@ export function RelatedClubList() {
   }
 
   return (
-    <Box bgColor={'white'} m={3}>
-      <Heading as="h4" size={'md'} pt={4} pl={4}>
+    <Box mt={3} p={4}>
+      <Heading as="h4" size={'18px'} fontWeight={600} color={openColor.gray[8]}>
         AI 기반으로 추천해드려요
       </Heading>
-      {relatedClubs.length === 0 && (
-        <Flex px={4} h={'100px'} align={'center'}>
-          <Text color={'gray.500'}>
-            동아리 추천을 받으려면 <br />
-            즐겨찾기 기능을 사용해보세요
-          </Text>
-        </Flex>
-      )}
-      <ClubRowCardList>
-        {relatedClubs.map((club, index) => (
-          <ClubRowCard
-            key={index}
-            club={club}
-            cardStyle={cardStyle}
-            imageStyle={imageStyle}
-            descriptionStyle={descriptionStyle}
-          />
-        ))}
-      </ClubRowCardList>
+      <Box mt={1}>
+        {relatedClubs.length === 0 && (
+          <Flex h={'100px'} align={'center'}>
+            <Text color={'gray.500'}>
+              동아리 추천을 받으려면 <br />
+              즐겨찾기 기능을 사용해보세요
+            </Text>
+          </Flex>
+        )}
+        <ClubRowCardList>
+          {relatedClubs.map((club, index) => (
+            <ClubRowCard
+              key={index}
+              club={club}
+              cardStyle={cardStyle}
+              imageStyle={imageStyle}
+              descriptionStyle={descriptionStyle}
+            />
+          ))}
+        </ClubRowCardList>
+      </Box>
     </Box>
   );
 }

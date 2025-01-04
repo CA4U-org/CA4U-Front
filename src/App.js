@@ -1,6 +1,6 @@
 import React from 'react';
 import { BrowserRouter as Router, Route, Routes } from 'react-router-dom';
-import MainPage from './page/MainPage';
+import MainPage from './page/main/MainPage';
 import ClubDetailPage from './page/ClubDetailPage';
 import PostDetailPage from './page/PostDetailPage';
 import ClubVerificationPage from './page/ClubVerificationPage';
@@ -14,7 +14,8 @@ import OAuth2RedirectHandler from './components/OAuth2RedirectHandler';
 import { UserRegistrationPage } from './page/user-registration/UserRegistrationPage';
 import { FavoritesPage } from './page/FavoritesPage';
 import SocialLogin from './LoginForm';
-import SearchPage from './page/SearchPage';
+import SearchPage from './page/search/SearchPage';
+import { BoardPage } from './page/BoardPage';
 
 function App() {
   return (
@@ -43,6 +44,7 @@ function App() {
           <Route path="/my" element={<MyPage />} />
           <Route path="/register" element={<UserRegistrationPage />} />
           <Route path="/favorites" element={<FavoritesPage />} />
+          <Route path={'/board'} element={<BoardPage />} />
         </Routes>
       </Router>
     </MobileFrameWrapper>

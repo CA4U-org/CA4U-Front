@@ -44,11 +44,7 @@ const AIRecommendation = () => {
   }
 
   return (
-    <Box>
-      <Text mt={6} ml={4} fontSize="xl" fontWeight="bold">
-        AI 동아리 추천
-      </Text>
-
+    <Box bg={'white'}>
       <Box
         position="relative"
         width="100%"
@@ -98,7 +94,7 @@ const AIRecommendation = () => {
       >
         <Slider {...settings}>
           {clubs.map((club, index) => (
-            <Box key={index} p={4}>
+            <Box key={index}>
               <Box borderRadius="lg" overflow="hidden" boxShadow="md">
                 <Image
                   src={club.logoImgUrl}

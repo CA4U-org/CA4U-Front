@@ -1,60 +1,57 @@
 import React from 'react';
-import { Box, Button, Text, Image, Flex } from '@chakra-ui/react';
+import { Box, Flex, Text } from '@chakra-ui/react';
 
 const AffiliationViewButton = ({ mainText, subText, icon }) => {
   return (
-    <Button
-      height="auto"
+    <Flex
+      direction="column"
+      align="flex-start"
+      width="full"
       bg="white"
-      border="1px solid"
-      borderColor="gray.200"
-      borderRadius="xl"
-      boxShadow="md"
       whiteSpace="normal"
-      p={2}
-      _hover={{ bg: 'gray.50' }}
-      _acive={{ bg: 'gray.100' }}
+      boxShadow={'md'}
       display="flex"
       flexDirection="column"
       alignItems="flex-start"
       wordBreak="break-word"
-      position="relative"
+      p={2}
+      w={'full'}
+      position={'relative'}
+      borderRadius={'lg'}
     >
-      <Flex
-        direction="column"
-        align="flex-start"
-        width="full"
-        minHeight={'60px'}
+      <Box
+        position="absolute"
+        bottom="0"
+        right={0}
+        width="50%"
+        height="50%"
+        backgroundImage={`url(${icon})`}
+        backgroundSize="contain" /* 이미지가 잘리지 않게 설정 */
+        backgroundPosition="center" /* 이미지를 중앙에 배치 */
+        backgroundRepeat="no-repeat" /* 이미지 반복 방지 */
+        opacity={0.3} /* 반투명 효과 */
+        pointerEvents="none" /* 배경 클릭 방지 */
+      />
+      <Text
+        fontSize="ml"
+        fontWeight="extrabold"
+        color="cauBlue"
+        mb={1}
+        noOfLines={1}
       >
-        <Text
-          fontSize="ml"
-          fontWeight="extrabold"
-          color=" cauBlue "
-          mb={1}
-          noOfLines={1}
-        >
-          {mainText}
-        </Text>
-        <Text
-          fontSize="small"
-          color="cauBlue"
-          mt="1"
-          noOfLines={2}
-          textAlign="left"
-        >
-          {subText}
-        </Text>
-        <Box position="absolute" bottom={-1} right={-2}>
-          <Image
-            src={icon}
-            alt="이미지"
-            boxSize="40px"
-            ml="auto"
-            alignSelf="flex-end"
-          ></Image>
-        </Box>
-      </Flex>
-    </Button>
+        {mainText}
+      </Text>
+      <Text
+        fontSize="small"
+        color="cauBlue"
+        mt="1"
+        noOfLines={2}
+        textAlign="left"
+        fontWeight={500}
+      >
+        {subText}
+      </Text>
+    </Flex>
   );
 };
 
