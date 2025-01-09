@@ -67,6 +67,15 @@ export function FavoritesPage() {
           <Heading size="lg" mb={4}>
             즐겨찾기한 동아리
           </Heading>
+          <Box
+            backgroundColor={'yellow'}
+            w={{ base: '100px', sm: '150px', lg: '400px' }}
+            borderTopColor={'blue'}
+            border={'3px solid'}
+            textAlign={'center'}
+          >
+            hello
+          </Box>
 
           {favorites.length === 0 ? (
             <Center py={10}>

@@ -51,6 +51,7 @@ export function FavoritesPage() {
       console.error('Failed to remove favorite:', error);
     }
   };
+
   if (isLoading) {
     return (
       <Center h="100vh">

@@ -2,7 +2,6 @@ import React, { useState } from 'react';
 import {
   Box,
   Flex,
-  Grid,
   Heading,
   Icon,
   IconButton,
@@ -12,26 +11,94 @@ import {
   Text,
 } from '@chakra-ui/react';
 import Header from '../../components/Header/Header';
-import { useLocation, useNavigate } from 'react-router-dom';
 
 import { SearchIcon } from '@chakra-ui/icons';
-import AffiliationViewButton from '../../components/AffiliationViewButton';
-import cauIcon from '../../assets/CAU-logo.svg';
-import linkIcon from '../../assets/link_icon.svg';
-import puangIcon from '../../assets/푸앙-icon.svg';
 import { PageWrapper } from '../PageWrapper';
 import openColor from 'open-color';
-import { BsMusicNoteBeamed } from 'react-icons/bs';
-import { IoIosBasketball } from 'react-icons/io';
-import { FaChurch, FaRunning } from 'react-icons/fa';
-import { MdVolunteerActivism } from 'react-icons/md';
-import { RiGraduationCapFill } from 'react-icons/ri';
+import { SearchResult } from './SearchResult';
+import { Filters } from './Filters';
+import { findClubsWithCondition } from '../../api/club/clubApi';
 
-const Spacer = () => {
-  return <Box mt={6}></Box>;
+const isNoneSelected = (condition) => {
+  return (
+    condition.query === '' &&
+    condition.isRecruit === null &&
+    condition.campusScope === null &&
+    condition.collegeId === '' &&
+    condition.majorId === '' &&
+    condition.categories.length === 0 &&
+    condition.clubTypes.length === 0 &&
+    condition.sizes.length === 0
+  );
 };
 
-const SubHeader = ({ title }) => {
+const SearchPage = () => {
+  const [inputQuery, setInputQuery] = useState('');
+  const [condition, setCondition] = useState({
+    query: '',
+    isRecruit: null,
+    campusScope: null,
+    collegeId: '',
+    majorId: '',
+    categories: [],
+    clubTypes: [],
+    sizes: [],
+  });
+
+  const handleInputQueryChange = (e) => {
+    setInputQuery(e.target.value);
+  };
+
+  const handleQueryChange = () => {
+    setCondition({ ...condition, query: inputQuery });
+  };
+
+  const clubs = findClubsWithCondition(condition);
+
+  return (
+    <PageWrapper navItem={'검색'} bgColor={openColor.gray[0]}>
+      <Header title="검색 화면" />
+      <Box px={3}>
+        {/* 검색창 섹션 */}
+        <Box mt={1}></Box>
+        <Box>
+          <Flex gap={2} align="center">
+            <InputGroup h={'40px'}>
+              <InputLeftElement pointerEvents="none">
+                <SearchIcon color="gray.400" />
+              </InputLeftElement>
+              <Input
+                h={'full'}
+                placeholder="동아리를 검색해보세요 ex. 타박네"
+                borderRadius="full"
+                bg="white"
+                _focus={{
+                  borderColor: 'blue.500',
+                  boxShadow: '0 0 0 1px var(--chakra-colors-blue-500)',
+                }}
+                onChange={handleInputQueryChange}
+                value={inputQuery}
+              />
+            </InputGroup>
+            <IconButton
+              h={'40px'}
+              icon={<SearchIcon />}
+              colorScheme="blue"
+              size="md"
+              borderRadius="full"
+              aria-label="검색"
+              onClick={handleQueryChange}
+            />
+          </Flex>
+          <Filters condition={condition} setCondition={setCondition} />
+          <SearchResult clubs={clubs} />
+        </Box>
+      </Box>
+    </PageWrapper>
+  );
+};
+
+const MHeading = ({ children }) => {
   return (
     <Heading
       as="h4"
@@ -40,118 +107,20 @@ const SubHeader = ({ title }) => {
       fontWeight="600"
       mb={1}
     >
-      {title}
+      {children}
     </Heading>
   );
 };
 
-const CATEGORY_LIST = [
-  {
-    title: '학술',
-    icon: RiGraduationCapFill,
-  },
-  {
-    title: '문화예술',
-    icon: BsMusicNoteBeamed,
-  },
-  {
-    title: '운동',
-    icon: IoIosBasketball,
-  },
-  {
-    title: '취미',
-    icon: FaRunning,
-  },
-  {
-    title: '종교',
-    icon: FaChurch,
-  },
-  {
-    title: '봉사',
-    icon: MdVolunteerActivism,
-  },
-];
-
-const SearchPage = () => {
-  const location = useLocation();
-  const navigate = useNavigate();
-  const [searchQuery, setSearchQuery] = useState('');
-
+function CategoryItem({ title, icon, onClick }) {
   return (
-    <PageWrapper navItem={'검색'} bgColor={openColor.gray[0]}>
-      <Header title="검색 화면" />
-      <Box px={3}>
-        {/* 검색창 섹션 */}
-        <Box>
-          <Flex gap={2} align="center">
-            <InputGroup size="md">
-              <InputLeftElement pointerEvents="none">
-                <SearchIcon color="gray.400" />
-              </InputLeftElement>
-              <Input
-                value={searchQuery}
-                onChange={(e) => setSearchQuery(e.target.value)}
-                placeholder="동아리를 검색해보세요 ex. 타박네"
-                borderRadius="full"
-                bg="white"
-                _focus={{
-                  borderColor: 'blue.500',
-                  boxShadow: '0 0 0 1px var(--chakra-colors-blue-500)',
-                }}
-              />
-            </InputGroup>
-            <IconButton
-              icon={<SearchIcon />}
-              colorScheme="blue"
-              size="md"
-              borderRadius="full"
-              aria-label="검색"
-            />
-          </Flex>
-        </Box>
-
-        <Spacer />
-
-        <SubHeader title="동아리 소속" />
-        <Grid templateColumns={'repeat(3, 1fr)'} gap={4} width="full">
-          <AffiliationViewButton
-            mainText="중앙"
-            subText="동아리 연합회"
-            icon={cauIcon}
-          />
-          <AffiliationViewButton
-            mainText="단과대/학과"
-            subText="단과대/학과(부)"
-            icon={linkIcon}
-          />
-          <AffiliationViewButton
-            mainText="그 외"
-            subText="준 동아리, 학회, 스터디"
-            icon={puangIcon}
-          />
-        </Grid>
-
-        <Spacer />
-        <SubHeader title="카테고리" />
-        <Grid templateColumns={'repeat(3, 1fr)'} gap={1} width="full">
-          {CATEGORY_LIST.map((category) => (
-            <CategoryItem
-              key={category.title}
-              title={category.title}
-              icon={category.icon}
-            />
-          ))}
-        </Grid>
-        {/*<CategoryView />*/}
-        {/* 검색 결과 섹션은 여기에 추가 */}
-      </Box>
-    </PageWrapper>
-  );
-};
-
-function CategoryItem({ title, icon }) {
-  return (
-    <Flex aspectRatio={1} justify={'content'} align={'center'} p={3}>
+    <Flex
+      aspectRatio={1}
+      justify={'content'}
+      align={'center'}
+      p={3}
+      onClick={onClick}
+    >
       <Flex
         w={'full'}
         h="full"

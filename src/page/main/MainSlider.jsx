@@ -30,7 +30,7 @@ export default function MainSlider() {
   const cards = [Intro, CASC, SKI, GDG];
 
   return (
-    <Box position={'relative'} overflow={'hidden'}>
+    <Box position={'relative'} overflow={'hidden'} h="360px">
       {/* CSS files for react-slick */}
       <link
         rel="stylesheet"

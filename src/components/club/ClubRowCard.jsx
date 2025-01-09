@@ -14,7 +14,7 @@ export function ClubRowCard({ club }) {
       onClick={() => navigate(`/club/${club.id}`)}
     >
       <Image src={club.logoImgUrl} boxSize={'120px'} borderTopRadius={'lg'} />
-      <Box p={2} bg={'white'} borderBottomRadius={'lg'}>
+      <Box p={2} bg={'white'} borderBottomRadius={'lg'} h={'80px'}>
         <Text
           fontWeight={'bolder'}
           fontSize={'sm'}

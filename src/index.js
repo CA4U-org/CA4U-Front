@@ -11,7 +11,6 @@ import { mergedTheme } from './shared/theme/mergedTheme';
 const container = document.getElementById('root');
 const root = createRoot(container);
 
-console.log(mergedTheme);
 root.render(
   <ChakraProvider theme={mergedTheme}>
     <AuthProvider>

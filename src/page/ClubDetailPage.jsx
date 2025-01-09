@@ -15,7 +15,7 @@ import ClubImageSlider from '../components/ClubImageSlider';
 import ClubInfo from '../components/ClubInfo';
 import { addRecentViewedClub } from '../feature/recent-viewed-club/addRecentViewedClub';
 import { getClubDetail } from '../api/club/clubApi';
-import { toggleFavorites, getFavorites } from '../api/favorite/favorite';
+import { getFavorites, toggleFavorites } from '../api/favorite/favorite';
 
 // 이미지 관련 모크데이터
 const clubImages = [
