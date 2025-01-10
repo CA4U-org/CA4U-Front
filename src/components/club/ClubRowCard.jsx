@@ -11,6 +11,8 @@ export function ClubRowCard({ club }) {
       direction={'column'}
       border={'1px solid #eee'}
       w={'120px'}
+      boxShadow={'md'}
+      my={1}
       onClick={() => navigate(`/club/${club.id}`)}
     >
       <Image src={club.logoImgUrl} boxSize={'120px'} borderTopRadius={'lg'} />

@@ -1,19 +1,16 @@
 import React from 'react';
-import FavoriteButton from './FavoriteButton';
-import VerifiedButton from './VerifiedButton';
 import {
   Box,
+  Container,
+  Divider,
+  Flex,
   Heading,
-  Text,
-  VStack,
-  HStack,
-  Tag,
+  Link,
   List,
   ListItem,
-  Link,
-  Container,
-  Flex,
-  Divider,
+  Tag,
+  Text,
+  VStack,
 } from '@chakra-ui/react';
 
 const ClubTags = () => {
@@ -129,7 +126,7 @@ const ClubInfo = ({ clubDetail }) => {
   if (!clubDetail) return null;
 
   return (
-    <Container maxW="container.md" p="4">
+    <Container p="4">
       <VStack align="stretch" spacing="4">
         <Flex justify="space-between" align="center">
           <Box>

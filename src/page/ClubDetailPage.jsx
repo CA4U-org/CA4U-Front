@@ -1,21 +1,40 @@
 import React, { useEffect, useState } from 'react';
 import {
   Box,
-  Button,
   Flex,
-  IconButton,
+  Heading,
   Image,
+  Link,
+  List,
+  ListItem,
+  Tag,
   Text,
   useToast,
+  VStack,
 } from '@chakra-ui/react';
 import { useNavigate, useParams } from 'react-router-dom';
-import { ChevronLeftIcon } from '@chakra-ui/icons';
-import { IoIosHeart, IoIosHeartEmpty } from 'react-icons/io';
-import ClubImageSlider from '../components/ClubImageSlider';
-import ClubInfo from '../components/ClubInfo';
 import { addRecentViewedClub } from '../feature/recent-viewed-club/addRecentViewedClub';
 import { getClubDetail } from '../api/club/clubApi';
 import { getFavorites, toggleFavorites } from '../api/favorite/favorite';
+import { PageWrapper } from './PageWrapper';
+import Header from '../components/Header/Header';
+import openColor from 'open-color';
+import { getRelatedClubs } from '../api/recommend/getRelatedClubs';
+import { ClubRowCard } from '../components/club/ClubRowCard';
+import { ClubRowCardList } from '../components/club/ClubRowCardList';
+
+function scrollToTop() {
+  const scrollableContainer = document.querySelector('.scrollable-container');
+
+  if (scrollableContainer) {
+    scrollableContainer.scrollTo({
+      top: 0,
+      behavior: 'smooth', // 부드러운 스크롤
+    });
+  } else {
+    console.error('Scrollable container not found!');
+  }
+}
 
 // 이미지 관련 모크데이터
 const clubImages = [
@@ -36,6 +55,7 @@ const ClubDetailPage = () => {
   const [clubDetail, setClubDetail] = useState(null);
   const [loading, setLoading] = useState(true);
   const [isFavorite, setIsFavorite] = useState(false);
+  const [relatedClubs, setRelatedClubs] = useState([]);
 
   // 즐겨찾기 상태 체크
   const checkFavoriteStatus = async () => {
@@ -92,7 +112,15 @@ const ClubDetailPage = () => {
 
     fetchData();
     addRecentViewedClub(clubId);
+
+    getRelatedClubs([clubId]).then((res) => {
+      setRelatedClubs(res.result);
+    });
+
+    scrollToTop();
   }, [clubId]);
+
+  console.log(clubDetail);
 
   const handleImageClick = () => {
     navigate('/club-images');
@@ -102,107 +130,204 @@ const ClubDetailPage = () => {
   if (!clubDetail) return <div>Club not found</div>;
 
   return (
+    <PageWrapper bgColor={openColor.gray[0]}>
+      <Header title={loading ? '' : clubDetail.clubNm} />
+      <Box w={'full'} position="relative" borderRadius="lg">
+        <Image
+          src="https://i.imgur.com/jcW68Wj.png"
+          h="230px"
+          objectFit="cover"
+          alt="Club Main Image"
+          w={'full'}
+        />
+
+        <Image
+          src={clubDetail.logoImgUrl}
+          boxSize="90px"
+          position="absolute"
+          top="180px"
+          left="50%"
+          transform="translate(-50%, -0%)"
+          borderRadius="full"
+          border="2px solid"
+          borderColor="white"
+          boxShadow="lg"
+          alt="Club Logo"
+        />
+
+        <Flex
+          direction="column"
+          align="center"
+          mt="60px"
+          px="4"
+          pb="4"
+          textAlign="center"
+          w={'full'}
+        >
+          <Text fontWeight="bold" fontSize="xl" color="gray.800">
+            {clubDetail.clubNm}
+          </Text>
+          <Text fontSize="sm" color="gray.500">
+            {/* 클럽의 추가 설명이나 태그 */}
+            {clubDetail.briefDescription}
+          </Text>
+        </Flex>
+
+        <VStack align="stretch" spacing="4" px={4}>
+          <ClubTags />
+          <RecruitmentInfo clubDetail={clubDetail} />
+          <Notice />
+
+          <Box mt="6" bg={'white'} boxShadow={'md'} p={4}>
+            <Heading as="h2" size="md" mb="2">
+              About {clubDetail.clubNm}
+            </Heading>
+            <Text
+              fontSize="sm"
+              color="gray.700"
+              lineHeight="tall"
+              whiteSpace="pre-line"
+            >
+              {clubDetail.specDescription}
+            </Text>
+          </Box>
+
+          <Box bg={'white'} boxShadow={'md'} p={4}>
+            <Heading as="h2" size="md" mb="2">
+              모집 공고
+            </Heading>
+            <Text
+              fontSize="sm"
+              color="gray.700"
+              lineHeight="tall"
+              whiteSpace="pre-line"
+            >
+              {clubDetail.recruitDescription}
+            </Text>
+          </Box>
+          <Box mt={2}>
+            <Heading as={'m4'} size={'md'} color={openColor.gray[8]}>
+              관련 있는 동아리도 살펴보세요
+            </Heading>
+            {relatedClubs.length !== 0 && (
+              <ClubRowCardList>
+                {relatedClubs.map((c) => {
+                  return <ClubRowCard key={c.id} club={c} />;
+                })}
+              </ClubRowCardList>
+            )}
+          </Box>
+        </VStack>
+      </Box>
+    </PageWrapper>
+  );
+};
+
+const ClubTags = () => {
+  // TODO: 카테고리 정보가 API에 없는 것 같아서 임시로 유지
+  const tags = ['동아리연합회', '문화예술', '중규모', '상시 모집'];
+
+  return (
+    <Flex gap="2" flexWrap="wrap" mt="2" w={'full'}>
+      {tags.map((tag, index) => (
+        <Tag
+          key={index}
+          size="sm"
+          variant="subtle"
+          colorScheme="blue"
+          borderRadius="full"
+          px="3"
+        >
+          {tag}
+        </Tag>
+      ))}
+    </Flex>
+  );
+};
+
+const RecruitmentInfo = ({ clubDetail }) => {
+  return (
     <Box
-      w="full"
-      h="full"
-      display="flex"
-      flexDirection="column"
-      position="relative"
-      overflow="hidden"
+      mt="4"
+      p="4"
+      borderRadius="lg"
+      borderColor="gray.200"
+      bg={'white'}
+      boxShadow={'md'}
     >
-      {/* 헤더 영역 */}
-      <Box
-        w="full"
-        h="50px"
-        bg="cauBlue"
-        position="relative"
-        display="flex"
-        alignItems="center"
-        justifyContent="center"
-        color="white"
-        flex="none"
+      <Heading as="h3" size="sm" mb="2">
+        상세 모집
+      </Heading>
+      <List spacing="2">
+        <ListItem fontSize="sm">
+          <Text as="span" fontWeight="bold">
+            선발 대상:
+          </Text>{' '}
+          {clubDetail.targetPeopleDescription}
+        </ListItem>
+        <ListItem fontSize="sm">
+          <Text as="span" fontWeight="bold">
+            선발 주기:
+          </Text>{' '}
+          {clubDetail.targetCycleDescription}
+        </ListItem>
+        <ListItem fontSize="sm">
+          <Text as="span" fontWeight="bold">
+            지원 방법:
+          </Text>{' '}
+          {clubDetail.applyDescription}
+        </ListItem>
+        <ListItem fontSize="sm">
+          <Text as="span" fontWeight="bold">
+            활동 요일:
+          </Text>{' '}
+          {clubDetail.actDayDescription}
+        </ListItem>
+        <ListItem fontSize="sm">
+          <Text as="span" fontWeight="bold">
+            활동 장소:
+          </Text>{' '}
+          {clubDetail.locationDescription}
+        </ListItem>
+        <ListItem fontSize="sm">
+          <Text as="span" fontWeight="bold">
+            회비:
+          </Text>{' '}
+          {clubDetail.costDescription}원
+        </ListItem>
+      </List>
+    </Box>
+  );
+};
+
+// Notice 컴포넌트는 API에 해당 데이터가 없어서 임시로 유지하거나 제거
+const Notice = () => {
+  return (
+    <Box
+      mt="4"
+      p="4"
+      bg="blue.50"
+      borderRadius="lg"
+      border="1px"
+      borderColor="blue.200"
+    >
+      <Heading as="h4" size="sm" color="blue.600">
+        9/9 동아리연합회 홍보 부스 안내!
+      </Heading>
+      <Text mt="2" fontSize="sm" color="gray.600">
+        상황극 시뮬레이션, 한 호흡 챌린지 등을 체험하실 수 있는 기회이니
+        동아리에 관심을 가져주셨던 학우분들의 많은 참여 부탁드립니다.
+      </Text>
+      <Link
+        href="#"
+        color="blue.600"
+        fontSize="sm"
+        mt="2"
+        display="inline-block"
+        textDecoration="underline"
       >
-        <IconButton
-          icon={<ChevronLeftIcon w={6} h={6} />}
-          onClick={() => navigate('/')}
-          variant="ghost"
-          position="absolute"
-          left={2}
-          color="white"
-          _hover={{ bg: 'cauBlue' }}
-          aria-label="뒤로가기"
-        />
-        <Text fontSize="16px" fontWeight="700">
-          {clubDetail.clubNm} 상세보기
-        </Text>
-        <IconButton
-          icon={
-            isFavorite ? (
-              <IoIosHeart size="24px" color="#FF0000" />
-            ) : (
-              <IoIosHeartEmpty size="24px" color="#FFFFFF" />
-            )
-          }
-          onClick={handleFavorite}
-          variant="ghost"
-          position="absolute"
-          right={2}
-          color="white"
-          _hover={{ bg: 'cauBlue' }}
-          _active={{ transform: 'scale(1.1)' }}
-          aria-label="즐겨찾기"
-        />
-      </Box>
-
-      {/* 이미지 슬라이더 영역 */}
-      <Box
-        w="full"
-        h="auto"
-        paddingTop={['66.67%', '53.33%']}
-        position="relative"
-        flex="none"
-      >
-        <Box position="absolute" top={0} left={0} right={0} bottom={0}>
-          <ClubImageSlider
-            images={clubImages}
-            logo={clubDetail.logoImgUrl || clubImages[0]}
-          />
-        </Box>
-      </Box>
-
-      {/* 스크롤 가능한 컨텐츠 영역 */}
-      <Box flex="1" overflow="auto" display="flex" flexDirection="column">
-        {/* 활동사진 버튼 영역 */}
-        <Box w="full" px={4} py={2} flex="none">
-          <Button
-            onClick={handleImageClick}
-            w="full"
-            h="28px"
-            bg="#D4EAFF"
-            color="#454545"
-            fontSize="12px"
-            fontWeight="bold"
-            borderRadius="md"
-            _hover={{ bg: '#C0E0FF' }}
-          >
-            <Flex align="center">
-              <Image
-                src={activityIcon}
-                alt="Activity Icon"
-                w="16px"
-                h="16px"
-                mr={2}
-              />
-              활동사진 보러가기
-            </Flex>
-          </Button>
-        </Box>
-
-        {/* 클럽 정보 영역 */}
-        <Box flex="1" w="full">
-          <ClubInfo clubDetail={clubDetail} />
-        </Box>
-      </Box>
+        동아리 게시판 더보기 &gt;&gt;
+      </Link>
     </Box>
   );
 };

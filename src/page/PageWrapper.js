@@ -15,7 +15,7 @@ export function PageWrapper({
       h={'100vh'}
       overflow={'scroll'}
       bgColor={bgColor}
-      className={'hide-scrollbar'}
+      className={'hide-scrollbar scrollable-container'}
     >
       {isLoading ? <PageLoader /> : children}
       <Spacer mb="120px" />
