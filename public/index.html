@@ -53,8 +53,22 @@
     <!-- ampltude-->
     <script src="https://cdn.amplitude.com/libs/analytics-browser-2.11.1-min.js.gz"></script>
     <script src="https://cdn.amplitude.com/libs/plugin-session-replay-browser-1.8.0-min.js.gz"></script>
-    <script>window.amplitude.add(window.sessionReplay.plugin({ sampleRate: 1 }));
-    window.amplitude.init('e6c9d9349ca5492f5a4240167a1afaa1', { 'autocapture': { 'elementInteractions': true } });</script>
+    <script>
+
+      window.amplitude.add(window.sessionReplay.plugin({ sampleRate: 1 }));
+      window.amplitude.init('e6c9d9349ca5492f5a4240167a1afaa1', { 'autocapture': { 'elementInteractions': true } });
+
+      fetch('https://backend.ca4u.store/api/v1/users/me', {
+        credentials: 'include',
+      }).then((res) => {
+        return res.json();
+      }).then((body) => {
+        const userId = 'USER-00000000000' + body.result.id;
+        window.amplitude.setUserId(userId);
+      });
+
+
+    </script>
 
     <title>CA4U</title>
   </head>

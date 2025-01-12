@@ -21,12 +21,12 @@ export const SearchResult = ({ clubs }) => {
             navigate(`/club/${club.id}`);
           }}
         >
-          <Image src={club.logoImgUrl} borderTopRadius={'md'} />
-          <Box p={2}>
+          <Image src={club.logoImgUrl} borderTopRadius={'md'} aspectRatio={1} />
+          <Box p={2} h={'80px'}>
             <Text color={openColor.gray[8]} fontWeight={600}>
               {club.clubNm}
             </Text>
-            <Text color={openColor.gray[7]} fontSize={'14px'}>
+            <Text color={openColor.gray[7]} fontSize={'14px'} noOfLines={2}>
               {club.briefDescription}
             </Text>
           </Box>

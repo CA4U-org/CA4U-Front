@@ -3,10 +3,12 @@ import Slider from 'react-slick';
 import { Box, HStack, Image, Text, VStack } from '@chakra-ui/react';
 import { getUserRecommendedClubs } from '../../api/recommend/getUserRecommendedClubs';
 import { useAuth } from '../../shared/useAuth';
+import { useNavigate } from 'react-router-dom';
 
 const AIRecommendation = () => {
   const { user } = useAuth();
   const [clubs, setClubs] = useState([]);
+  const navigate = useNavigate();
 
   useEffect(() => {
     if (user) {
@@ -94,7 +96,15 @@ const AIRecommendation = () => {
       >
         <Slider {...settings}>
           {clubs.map((club, index) => (
-            <Box key={index}>
+            <Box
+              key={index}
+              onClick={() => {
+                navigate('/club/' + club.id);
+              }}
+              _hover={{
+                cursor: 'pointer',
+              }}
+            >
               <Box borderRadius="lg" overflow="hidden" boxShadow="md">
                 <Image
                   src={club.logoImgUrl}
@@ -103,7 +113,7 @@ const AIRecommendation = () => {
                   height="200px"
                   objectFit="cover"
                 />
-                <VStack align="stretch" p={4} spacing={3}>
+                <VStack align="stretch" p={4} spacing={3} h={'110px'}>
                   <HStack>
                     <Image
                       src={club.logoImgUrl}

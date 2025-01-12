@@ -6,6 +6,19 @@ import { FilterItemSelectingModal } from './FilterItemSelectingModal';
 export const Filters = ({ condition, setCondition }) => {
   const { isOpen, onOpen, onClose } = useDisclosure();
 
+  const clear = () => {
+    setCondition({
+      query: '',
+      isRecruit: null,
+      campusScope: null,
+      collegeId: '',
+      majorId: '',
+      categories: [],
+      clubTypes: [],
+      sizes: [],
+    });
+  };
+
   return (
     <>
       <Flex
@@ -16,7 +29,7 @@ export const Filters = ({ condition, setCondition }) => {
         className={'hide-scrollbar'}
         gap={2}
       >
-        <RefreshFilter />
+        <RefreshFilter onClick={clear} />
         <FilterItem title={'모집중'} onClick={onOpen} />
         <FilterItem
           title={'카테고리'}
@@ -69,9 +82,10 @@ const FilterItem = ({ title, selected, onClick }) => {
   );
 };
 
-const RefreshFilter = () => {
+const RefreshFilter = ({ onClick }) => {
   return (
     <Flex
+      onClick={onClick}
       shrink={0}
       px={3}
       py={1}

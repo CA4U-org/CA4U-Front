@@ -1217,3 +1217,8 @@ export const CATEGORY_LIST = [
     icon: MdVolunteerActivism,
   },
 ];
+
+export const RECRUITING_LIST = {
+  IS_RECRUITING: '모집 중',
+  IS_NOT_RECRUITING: '모집 안함',
+};

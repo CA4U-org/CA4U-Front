@@ -66,14 +66,21 @@ export function RelatedClubList() {
   if (!user) {
     return (
       <>
-        <Heading as={'h4'} fontSize={'16px'} pl={4}>
+        <Heading
+          as={'h4'}
+          fontSize={'18px'}
+          pl={4}
+          fontWeight={600}
+          color={openColor.gray[8]}
+          mt={4}
+        >
           로그인하고 추천 동아리를 확인하세요!
         </Heading>
         <Box position="relative" mx={3} my={1} bgColor={'white'}>
           <Flex
             position="absolute"
             w={'full'}
-            top={'50%'}
+            top={'40%'}
             zIndex={2}
             align={'center'}
             justify={'center'}

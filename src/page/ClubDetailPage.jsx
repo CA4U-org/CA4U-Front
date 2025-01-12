@@ -1,8 +1,11 @@
 import React, { useEffect, useState } from 'react';
 import {
   Box,
+  Button,
+  ButtonGroup,
   Flex,
   Heading,
+  Icon,
   Image,
   Link,
   List,
@@ -22,6 +25,7 @@ import openColor from 'open-color';
 import { getRelatedClubs } from '../api/recommend/getRelatedClubs';
 import { ClubRowCard } from '../components/club/ClubRowCard';
 import { ClubRowCardList } from '../components/club/ClubRowCardList';
+import { IoHeartOutline, IoHeartSharp, IoShareOutline } from 'react-icons/io5';
 
 function scrollToTop() {
   const scrollableContainer = document.querySelector('.scrollable-container');
@@ -56,6 +60,23 @@ const ClubDetailPage = () => {
   const [loading, setLoading] = useState(true);
   const [isFavorite, setIsFavorite] = useState(false);
   const [relatedClubs, setRelatedClubs] = useState([]);
+
+  const handleShare = async () => {
+    if (navigator.share) {
+      try {
+        await navigator.share({
+          title: document.title, // 현재 페이지의 제목
+          text: '동아리 공유하기',
+          url: window.location.href, // 현재 페이지의 URL
+        });
+        console.log('Sharing successful');
+      } catch (error) {
+        console.error('Sharing failed', error);
+      }
+    } else {
+      alert('이 브라우저는 공유 기능을 지원하지 않습니다.');
+    }
+  };
 
   // 즐겨찾기 상태 체크
   const checkFavoriteStatus = async () => {
@@ -130,22 +151,24 @@ const ClubDetailPage = () => {
   if (!clubDetail) return <div>Club not found</div>;
 
   return (
-    <PageWrapper bgColor={openColor.gray[0]}>
+    <PageWrapper bgColor={openColor.gray[0]} isLoading={loading}>
       <Header title={loading ? '' : clubDetail.clubNm} />
       <Box w={'full'} position="relative" borderRadius="lg">
         <Image
-          src="https://i.imgur.com/jcW68Wj.png"
-          h="230px"
-          objectFit="cover"
+          // src="https://i.imgur.com/jcW68Wj.png"
+          src={clubDetail.logoImgUrl}
+          objectFit="scale-down"
           alt="Club Main Image"
           w={'full'}
+          h={'370px'}
+          boxShadow={'lg'}
         />
 
         <Image
           src={clubDetail.logoImgUrl}
           boxSize="90px"
           position="absolute"
-          top="180px"
+          top="320px"
           left="50%"
           transform="translate(-50%, -0%)"
           borderRadius="full"
@@ -164,14 +187,52 @@ const ClubDetailPage = () => {
           textAlign="center"
           w={'full'}
         >
-          <Text fontWeight="bold" fontSize="xl" color="gray.800">
+          <Text fontWeight="bold" fontSize="2xl" color="gray.800">
             {clubDetail.clubNm}
           </Text>
-          <Text fontSize="sm" color="gray.500">
+          <Text fontSize="sm" color="gray.500" mt={1}>
             {/* 클럽의 추가 설명이나 태그 */}
             {clubDetail.briefDescription}
           </Text>
         </Flex>
+        <ButtonGroup
+          display={'grid'}
+          gridTemplateColumns={'repeat(2,1fr)'}
+          w={'full'}
+          px={4}
+          gap={2}
+          mb={2}
+        >
+          <Button
+            border={'1px solid'}
+            bg={'white'}
+            size={'md'}
+            borderColor={openColor.gray[4]}
+            color={openColor.gray[7]}
+            fontWeight={500}
+            onClick={handleShare}
+          >
+            <Icon as={IoShareOutline} mr={2} />
+            공유하기
+          </Button>
+          <Button
+            border={'1px solid'}
+            bg={'white'}
+            size={'md'}
+            borderColor={openColor.gray[4]}
+            color={openColor.gray[7]}
+            fontWeight={500}
+            onClick={handleFavorite}
+          >
+            <Icon
+              as={isFavorite ? IoHeartSharp : IoHeartOutline}
+              mr={2}
+              size={'md'}
+              color={isFavorite ? openColor.red[6] : openColor.gray[7]}
+            />
+            즐겨찾기
+          </Button>
+        </ButtonGroup>
 
         <VStack align="stretch" spacing="4" px={4}>
           <ClubTags />
